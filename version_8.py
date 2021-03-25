@@ -39,7 +39,7 @@ class Task():
 
 
     def __str__(self):
-        return str(self.name + repr(self.state) + repr(self.priority) + self.notes)
+        return str('Task Name' + self.name + ' Project:' + self.project.name + ' State:' + repr(self.state) + ' Piority' + repr(self.priority) + ' Notes: ' + self.notes)
 
 
 class Project():
@@ -72,7 +72,7 @@ class Project():
         for task in self._tasks:
             printed_tasks += str(task)
             printed_tasks += '\n'
-        return str('Name: ' + self.name + 'Color: ' + repr(self.color) + 'Notes' + self.notes + 'Tasks: ' + printed_tasks)
+        return str(' Name: ' + self.name + ' Color: ' + repr(self.color) + ' Notes: ' + self.notes + ' Tasks: \n' + printed_tasks)
 
 class ProjectManager():
 
@@ -89,12 +89,12 @@ class ProjectManager():
             self._projects.remove(project)
 
     def _save_projects(self):
-        outfile = open("saved_projects", 'wb')
+        outfile = open('saved_projects', 'wb')
         pickle.dump(self._projects, outfile)
         outfile.close()
 
     def _load_projects(self):
-        infile = open("saved_projects",'rb')
+        infile = open('saved_projects','rb')
         self._projects = pickle.load(infile)
         infile.close()
     
@@ -102,8 +102,8 @@ class ProjectManager():
         printed_projects = ''
         for project in self._projects:
             printed_projects += str(project)
-            printed_projects += "\n"
-        return str('Projects: ' + printed_projects)
+            printed_projects += '\n'
+        return str('Projects: \n' + printed_projects)
 
 
 class Project_GUI(tk.Frame):
@@ -145,7 +145,7 @@ class Project_GUI(tk.Frame):
         self._lst_task_frames = []
         for task in project._tasks:
             self._temp_task_gui = Task_GUI(task, self._can_pro_tasks)
-            self._temp_task_gui.grid()
+            self._temp_task_gui.grid(sticky='w')
             self._lst_task_frames.append(self._temp_task_gui)
 
 
@@ -153,7 +153,7 @@ class Project_GUI(tk.Frame):
         self.testtask = self.project.create_task()
         self.testtask.name = 'hello word'
         self.testtask_gui = Task_GUI(self.testtask, self._can_pro_tasks)
-        self.testtask_gui.grid()
+        self.testtask_gui.grid(sticky='w')
         self._lst_task_frames.append(self.testtask_gui)
 
 
@@ -167,7 +167,7 @@ class Project_GUI(tk.Frame):
 
         self._bttn_pro_add_task.grid(row=6, column=0, columnspan=3)
 
-        self._can_pro_tasks.grid(row=0, column=0, columnspan=3, rowspan=5)
+        self._can_pro_tasks.grid(row=0, column=0, columnspan=3, rowspan=9)
         self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
 
 
@@ -198,7 +198,7 @@ class TaskWindow():
 
         #button
         self._bttn_cancel_task = tk.Button(self.task_window, text='cancel', activebackground='red')
-        self._bttn_save_task = tk.Button(self.task_window, text='save')
+        self._bttn_save_task = tk.Button(self.task_window, text='save', activebackground='green')
 
         #listbox
         self._lb_priority = tk.Listbox(self.task_window, width=9, height=4)
@@ -213,6 +213,8 @@ class TaskWindow():
 
         #configuration
         self._entry_task_name.insert(0, self._task.name)
+        self._entry_task_notes.insert(0, self._task.notes)
+
 
         #layout
         self._lbl_set_task_name.grid(row=0, column=0, rowspan=2)
@@ -235,7 +237,7 @@ class TaskWindow():
         self._new_task.notes = self._entry_task_notes.get('1.0', 'end-1c')
         self._new_task.priority = self._lb_priority.get('active')
         self._new_task_gui = Task_GUI(self._new_task, self._can_pro_tasks)
-        self._new_task_gui.grid()
+        self._new_task_gui.grid(column=1)
         self._lst_task_frames.append(self._new_task_gui)
         self.task_window.destroy()
         
@@ -256,7 +258,7 @@ class Task_GUI(tk.Frame):
 
         #button
         self._check_task_done = tk.Checkbutton(self, variable=self.task.id)
-        self._bttn_task_delete = tk.Button(self, text='delete', background='red')
+        self._bttn_task_delete = tk.Button(self, text='delete', activebackground='red')
         self._bttn_task_edit = tk.Button(self, text='edit')
         self._bttn_task_show_notes = tk.Button(self, text='show notes')
         
@@ -271,6 +273,7 @@ class Task_GUI(tk.Frame):
         #eventhandler
         self._bttn_task_delete['command'] = self._delete_task_gui
         self._check_task_done['command'] = self._do_task_gui
+        #self._edit_task_gui['command'] = self._edit_task_gui
     
     def _delete_task_gui(self):
         self.task.project.delete_task(self.task)
@@ -281,7 +284,7 @@ class Task_GUI(tk.Frame):
         self.destroy()
 
     def _edit_task_gui(self):
-        self._edit_window = tk.Toplevel(self._master)
+        self._edit_window = TaskWindow(self.task, tk.Toplevel(self._master))
         
 
 
