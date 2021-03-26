@@ -160,11 +160,11 @@ class Project_GUI(tk.Frame):
         #layout
         self._lbl_pro_name.grid(row=0, column=0, rowspan=2)
         self._lbl_pro_notes.grid(row=1, column=0, rowspan=3)
+        
         self._bttn_pro_delete.grid(row=2, column=1)
         self._bttn_pro_fr_hide.grid(row=4, column=0)
         self._bttn_pro_fr_show.grid(row=4, column=1)
         self._bttn_pro_del_all_tasks.grid(row=5, column=0)
-
         self._bttn_pro_add_task.grid(row=6, column=0, columnspan=3)
 
         self._can_pro_tasks.grid(row=0, column=0, columnspan=3, rowspan=9)
@@ -172,21 +172,21 @@ class Project_GUI(tk.Frame):
 
 
         #eventhandler
-        self._bttn_pro_add_task['command'] = self._create_task_gui
+        self._bttn_pro_add_task['command'] = self._add_task_gui
 
-    def _create_task_gui(self):
+    def _add_task_gui(self):
         self.new_task = self.project.create_task()
         self.new_task_window = tk.Toplevel(self._master)
         self.new_task_window.title('Create/Edit Task')
-        self.new_task_window = TaskWindow(self.new_task, self.new_task_window)
-        self.new_task_window._create_task_gui()
-
+        self.new_task_window_gui = TaskWindow(self.new_task, self.new_task_window)
+        self.new_task_window_gui._create_task_gui()
 
 
 class TaskWindow():
     def __init__(self, task, window):
         self._task = task
         self.task_window = window
+
 
     def _create_task_gui(self):
         
@@ -236,9 +236,9 @@ class TaskWindow():
         self._new_task.name = self._entry_task_name.get()
         self._new_task.notes = self._entry_task_notes.get('1.0', 'end-1c')
         self._new_task.priority = self._lb_priority.get('active')
-        self._new_task_gui = Task_GUI(self._new_task, self._can_pro_tasks)
-        self._new_task_gui.grid(column=1)
-        self._lst_task_frames.append(self._new_task_gui)
+        #self._new_task_gui = Task_GUI(self._new_task, self._can_pro_tasks)
+        #self._new_task_gui.grid(column=1)
+        #self._lst_task_frames.append(self._new_task_gui)
         self.task_window.destroy()
         
         
@@ -251,16 +251,20 @@ class Task_GUI(tk.Frame):
         self.task = task
         self._master = root
 
+        #frame
+        self._fr_task_notes = tk.Frame(self, height=2, width=20)
+
         #label
         self._lbl_task_name = tk.Label(self, text=self.task.name)
         self._lbl_task_priority = tk.Label(self, text=self.task.priority)
-        self._lbl_task_notes = tk.Label(self, text=self.task.notes)
+        self._lbl_task_notes = tk.Label(self._fr_task_notes, text=self.task.notes)
 
         #button
         self._check_task_done = tk.Checkbutton(self, variable=self.task.id)
         self._bttn_task_delete = tk.Button(self, text='delete', activebackground='red')
         self._bttn_task_edit = tk.Button(self, text='edit')
         self._bttn_task_show_notes = tk.Button(self, text='show notes')
+        self._bttn_task_hide_notes = tk.Button(self._fr_task_notes, text='hide notes')
         
         #layout
         self._check_task_done.grid(row=0, column=0)
@@ -269,11 +273,20 @@ class Task_GUI(tk.Frame):
         self._bttn_task_show_notes.grid(row=0, column=4)
         self._bttn_task_edit.grid(row=0, column=5)
         self._bttn_task_delete.grid(row=0, column=6)
+        self._fr_task_notes.grid(row=0, column=0, columnspan=6)
+        
+
+        self._lbl_task_notes.grid(row=0, column=0, columnspan=5)
+        self._bttn_task_hide_notes.grid(row=0, column=6)
 
         #eventhandler
         self._bttn_task_delete['command'] = self._delete_task_gui
         self._check_task_done['command'] = self._do_task_gui
-        #self._edit_task_gui['command'] = self._edit_task_gui
+        self._bttn_task_edit['command'] = self._edit_task_gui
+
+        self._bttn_task_show_notes['command'] = self._fr_task_notes.grid(row=1, column=0, columnspan=6)
+        self._bttn_task_hide_notes['command'] = self._fr_task_notes.grid_forget()
+
     
     def _delete_task_gui(self):
         self.task.project.delete_task(self.task)
@@ -284,7 +297,9 @@ class Task_GUI(tk.Frame):
         self.destroy()
 
     def _edit_task_gui(self):
-        self._edit_window = TaskWindow(self.task, tk.Toplevel(self._master))
+        self._edit_window = tk.Toplevel(self._master)
+        self._edit_window_gui = TaskWindow(self.task, self._edit_window)
+        self._edit_window_gui._create_task_gui
         
 
 
@@ -302,28 +317,42 @@ class GUI(tk.Frame):
 
         
     def _create_project_gui(self):
-        project_window = tk.Toplevel(self._root)
-        project_window.title('Create a new Project')
+        self.project_window = tk.Toplevel(self._root)
+        self.project_window.title('Create a new Project')
+        
 
         #label
-        self._lbl_set_project_name = tk.Label(project_window, text='Project Name: ')
-        self._lbl_set_project_notes = tk.Label(project_window, text='Notes: ')
+        self._lbl_set_project_name = tk.Label(self.project_window, text='Project Name: ')
+        self._lbl_set_project_notes = tk.Label(self.project_window, text='Notes: ')
+        self._lbl_set_project_color = tk.Label(self.project_window, text='Color: ')
 
         #button
-        self._bttn_del_project = tk.Button(project_window, text='delete')
-        self._bttn_save_project = tk.Button(project_window, text='save')
+        self._bttn_del_project = tk.Button(self.project_window, text='delete')
+        self._bttn_save_project = tk.Button(self.project_window, text='save')
+
+        self._lb_color_project = tk.Listbox(self.project_window, width=7, height=8)
+        self._lb_color_project.insert(0, 'black')
+        self._lb_color_project.insert(1, 'blue')
+        self._lb_color_project.insert(2, 'red')
+        self._lb_color_project.insert(3, 'green')
+        self._lb_color_project.insert(4, 'yellow')
+        self._lb_color_project.insert(5, 'purple')
+        self._lb_color_project.insert(6, 'orange')
+        self._lb_color_project.insert(7, 'white')
 
         #entry
-        self._entry_project_name = tk.Entry(project_window)
-        self._entry_project_notes = tk.Text(project_window, width=20, height=5)
+        self._entry_project_name = tk.Entry(self.project_window)
+        self._entry_project_notes = tk.Text(self.project_window, width=20, height=5)
 
         #layout
         self._lbl_set_project_name.grid(row=0, column=0, rowspan=2)
-        self._entry_project_name.grid(row=0, column=1, rowspan=2, columnspan=3)
-        self._lbl_set_project_notes.grid(row=2, column=1)
-        self._entry_project_notes.grid(row=3, column=1, columnspan=3)
-        self._bttn_del_project.grid(row=5, column=3)
-        self._bttn_save_project.grid(row=5, column=4)
+        self._entry_project_name.grid(row=0, column=1, rowspan=2, columnspan=2)
+        self._lbl_set_project_notes.grid(row=3, column=0)
+        self._entry_project_notes.grid(row=3, column=1, columnspan=2, rowspan=3)
+        self._lbl_set_project_color.grid(row=1, column=4, columnspan=2)
+        self._lb_color_project.grid(row=2, column=4, columnspan=2, rowspan=4)
+        self._bttn_del_project.grid(row=7, column=4)
+        self._bttn_save_project.grid(row=7, column=5)
 
    
 
