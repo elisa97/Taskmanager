@@ -1,5 +1,4 @@
 import tkinter as tk
-from task_window import *
 from task import *
 
 class Task_GUI(tk.Frame):
@@ -51,7 +50,7 @@ class Task_GUI(tk.Frame):
     def _delete_task_gui(self):
         self.task.project.delete_task(self.task)
         self.destroy()
-            
+
     def _do_task_gui(self):
         self.task.do_task()
         self.destroy()
@@ -109,7 +108,7 @@ class Task_GUI(tk.Frame):
         self.task.name = self._entry_task_name.get()
         self.task.notes = self._entry_task_notes.get('1.0', 'end-1c')
         self.task.priority = self._lb_priority.get('active')
-        self.super_project_gui._lst_task_frames.append(self)
+        #self.super_project_gui._lst_task_frames.append(self)
         self.super_project_gui._update_tasks()
         self._edit_window.destroy()
 
