@@ -10,9 +10,11 @@ class Task_GUI(tk.Frame):
         self.task = task
         self._master = root
 
+        self.configure(bd=1,relief='groove')
+
         #label
-        self._lbl_task_name = tk.Label(self, text=self.task.name)
-        self._lbl_task_priority = tk.Label(self, text=self.task.priority)
+        self._lbl_task_name = tk.Label(self, text=self.task.name, width=20, anchor='w')
+        #self._lbl_task_priority = tk.Label(self, text=self.task.priority)
 
         self._lbl_task_notes = tk.Label(self.super_project_gui._fr_pro_task_notes, text=self.task.notes)
 
@@ -24,15 +26,17 @@ class Task_GUI(tk.Frame):
         #self._bttn_task_hide_notes = tk.Button(self, text='hide notes')
         
         #layout
-        self._check_task_done.grid(row=0, column=0)
+        self._check_task_done.grid(row=0, column=0, sticky='w', padx=2)
         self._lbl_task_name.grid(row=0, column=1)
-        self._lbl_task_priority.grid(row=0, column=3)
+        #self._lbl_task_priority.grid(row=0, column=3)
         self._bttn_task_show_notes.grid(row=0, column=4)
         self._bttn_task_edit.grid(row=0, column=5)
-        self._bttn_task_delete.grid(row=0, column=6)
+        self._bttn_task_delete.grid(row=0, column=6, sticky='e')
         #self._bttn_task_hide_notes.grid(row=0, column=6)  
 
         #self._lbl_task_notes.grid()
+
+        self._get_task_color()
 
 
         #eventhandler
@@ -109,3 +113,16 @@ class Task_GUI(tk.Frame):
         self.super_project_gui._update_tasks()
         self._edit_window.destroy()
 
+    def _get_task_color(self):
+        if self.task.priority == 'high':
+            self.configure(bg='red')
+            self._lbl_task_name.configure(bg='red')
+            self._check_task_done.configure(bg='red')
+        elif self.task.priority == 'medium':
+            self.configure(bg='yellow')
+            self._lbl_task_name.configure(bg='yellow')
+            self._check_task_done.configure(bg='yellow')
+        elif self.task.priority == 'low':
+            self.configure(bg='green')
+            self._lbl_task_name.configure(bg='green')
+            self._check_task_done.configure(bg='green')

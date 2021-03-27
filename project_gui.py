@@ -11,8 +11,8 @@ class Project_GUI(tk.Frame):
 
         #frame
         self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
-        self._fr_pro_notes = tk.Frame(self, height=20, width=20)
-        self._fr_pro_task_notes = tk.Frame(self._fr_pro_notes, height=20, width=20)
+        self._fr_pro_notes = tk.Frame(self, height=50, width=20, bg=self.project.color.value, bd=2, relief='groove')
+        self._fr_pro_task_notes = tk.Frame(self._fr_pro_notes, height=20, width=20, bd=2, relief='groove')
         
         self._update_tasks()
 
@@ -29,7 +29,7 @@ class Project_GUI(tk.Frame):
         self._bttn_pro_delete = tk.Button(self, text='delete')
         self._bttn_pro_edit = tk.Button(self, text='edit')
         self._bttn_pro_del_all_tasks = tk.Button(self, text='delete all Tasks')
-        self._bttn_pro_add_task = tk.Button(self, text='+ add new Task')
+        self._bttn_pro_add_task = tk.Button(self, text='+ add new Task', width=49)
         self._bttn_pro_fr_show = tk.Button(self, text='show Tasks')
         self._bttn_pro_fr_hide = tk.Button(self, text='hide Tasks')
 
@@ -39,17 +39,15 @@ class Project_GUI(tk.Frame):
         self._bttn_pro_fr_hide.grid(row=4, column=0)
         self._bttn_pro_fr_show.grid(row=4, column=1)
         self._bttn_pro_del_all_tasks.grid(row=5, column=0)
-        self._bttn_pro_add_task.grid(row=6, column=0, columnspan=3)
+        self._bttn_pro_add_task.grid(row=6, column=0,sticky='w', columnspan=3)
 
         self._lbl_dscrb_pro_notes.grid(row=0, column=0)
         self._lbl_pro_notes.grid(row=1, column=0, rowspan=5)
         self._lbl_dscrb_task_notes.grid(row=0, column=0)
 
         self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
-        self._fr_pro_notes.grid(row=0, column=5, rowspan=8, sticky='n')
-        self._fr_pro_task_notes.grid(row=8, column=0, sticky='s')
-
-
+        self._fr_pro_notes.grid(row=0, column=5, rowspan=20, sticky='n')
+        self._fr_pro_task_notes.grid(row=10, column=0)
 
 
         #eventhandler
@@ -58,9 +56,16 @@ class Project_GUI(tk.Frame):
         self._bttn_pro_fr_hide['command'] = lambda: self._fr_pro_tasks.grid_forget()
         self._bttn_pro_fr_show['command'] = lambda: self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
 
+    '''def hide_task(self):
+        self._bttn_pro_fr_hide.configure(text='show tasks')
+        self._fr_pro_tasks.grid_forget()
+        self._bttn_pro_fr_hide['command'] = 
+    
+    def show_task(self):
+        self._bttn_pro_fr_hide.configure(text='hide tasks')
+        self._bttn_pro_fr_hide.grid(row=8, column=0, columnspan=3, rowspan=10)'''
+
        
-
-
     def _create_task_gui(self):
 
         self.task_window = tk.Toplevel(self._master)
