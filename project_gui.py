@@ -14,8 +14,8 @@ class Project_GUI(tk.Frame):
 
         #frame
         self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
-        self._fr_pro_overview = tk.Frame(self, height=20, width=20, bg=self.project.color.value)
-        self._fr_pro_notes = tk.Frame(self, height=20, width=20, bg=self.project.color.value, bd=2, relief='groove')
+        self._fr_pro_overview = tk.Frame(self, height=20, width=20, bg=self.project.color)
+        self._fr_pro_notes = tk.Frame(self, height=20, width=20, bg=self.project.color, bd=2, relief='groove')
         self._fr_pro_task_notes = tk.Frame(self._fr_pro_notes, height=20, width=20, bd=2, relief='groove')
         
         self._update_tasks()

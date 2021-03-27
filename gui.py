@@ -63,14 +63,6 @@ class GUI(tk.Frame):
         self._root.mainloop()
 
 
-    '''def _create_project_overview(self):
-        if self._lb_projects.get('active') != '':
-            self._actual_project = self._lb_projects.get('active')
-        else:
-            self._actual_project = self.progui
-        self._actual_project_gui = Project_GUI(self._actual_project, self._fr_project_overview)
-        self._actual_project_gui.configure(bg=self._actual_project.color)'''
-
     def build_listboxes(self):
         i = 0
         for pro in self._projectmanager._projects:
@@ -143,11 +135,10 @@ class GUI(tk.Frame):
                 self.found_project = project
                 break
 
-
-        self._create_elements()
         #self._destroy_project_gui()
-
         self._new_project_gui = Project_GUI(self.found_project, self._fr_project_overview)
+        self._new_project_gui.grid(row=7, column=0, rowspan=10)
+        self._create_elements()
 
 
     def _destroy_project_gui(self):
