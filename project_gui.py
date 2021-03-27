@@ -11,7 +11,8 @@ class Project_GUI(tk.Frame):
 
         #frame
         self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
-        self._fr_pro_notes = tk.Frame(self, height=50, width=20, bg=self.project.color.value, bd=2, relief='groove')
+        self._fr_pro_overview = tk.Frame(self, height=20, width=20, bg=self.project.color.value)
+        self._fr_pro_notes = tk.Frame(self, height=20, width=20, bg=self.project.color.value, bd=2, relief='groove')
         self._fr_pro_task_notes = tk.Frame(self._fr_pro_notes, height=20, width=20, bd=2, relief='groove')
         
         self._update_tasks()
@@ -19,19 +20,19 @@ class Project_GUI(tk.Frame):
     def _design_project_gui(self):
 
         #label
-        self._lbl_pro_name = tk.Label(self, text=self.project.name)
+        self._lbl_pro_name = tk.Label(self._fr_pro_overview, text=self.project.name)
         self._lbl_dscrb_pro_notes = tk.Label(self._fr_pro_notes, text='Notes: ')
-        self._lbl_pro_notes = tk.Label(self._fr_pro_notes, text=self.project.notes)
-        self._lbl_pro_no_tasks = tk.Label(self, text='All Tasks done! :-)')
+        self._lbl_pro_notes = tk.Label(self._fr_pro_notes, text=self.project.notes, height=5, anchor='nw')
+        #self._lbl_pro_no_tasks = tk.Label(self, text='All Tasks done! :-)')
         self._lbl_dscrb_task_notes = tk.Label(self._fr_pro_task_notes, text='Task Notes: ')
 
         #button
-        self._bttn_pro_delete = tk.Button(self, text='delete')
-        self._bttn_pro_edit = tk.Button(self, text='edit')
-        self._bttn_pro_del_all_tasks = tk.Button(self, text='delete all Tasks')
-        self._bttn_pro_add_task = tk.Button(self, text='+ add new Task', width=49)
-        self._bttn_pro_fr_show = tk.Button(self, text='show Tasks')
-        self._bttn_pro_fr_hide = tk.Button(self, text='hide Tasks')
+        self._bttn_pro_delete = tk.Button(self._fr_pro_overview, text='delete')
+        self._bttn_pro_edit = tk.Button(self._fr_pro_overview, text='edit')
+        self._bttn_pro_del_all_tasks = tk.Button(self._fr_pro_overview, text='delete all Tasks')
+        self._bttn_pro_add_task = tk.Button(self._fr_pro_overview, text='+ add new Task', width=49)
+        self._bttn_pro_fr_show = tk.Button(self._fr_pro_overview, text='show Tasks')
+        self._bttn_pro_fr_hide = tk.Button(self._fr_pro_overview, text='hide Tasks')
 
         #layout
         self._lbl_pro_name.grid(row=0, column=0, rowspan=2)
@@ -42,11 +43,14 @@ class Project_GUI(tk.Frame):
         self._bttn_pro_add_task.grid(row=6, column=0,sticky='w', columnspan=3)
 
         self._lbl_dscrb_pro_notes.grid(row=0, column=0)
-        self._lbl_pro_notes.grid(row=1, column=0, rowspan=5)
+
+        self._lbl_pro_notes.grid(row=1, column=0, rowspan=5, pady=5)
         self._lbl_dscrb_task_notes.grid(row=0, column=0)
 
+
+        self._fr_pro_overview.grid(row=0, column=0, columnspan=3, rowspan=8)
         self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
-        self._fr_pro_notes.grid(row=0, column=5, rowspan=20, sticky='n')
+        self._fr_pro_notes.grid(row=0, column=5, rowspan=10, sticky='n')
         self._fr_pro_task_notes.grid(row=10, column=0)
 
 
