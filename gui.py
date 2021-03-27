@@ -11,7 +11,7 @@ class GUI(tk.Frame):
 
 
         self.pack()
-        self._update_project()
+        self._create_elements()
 
     def _create_elements(self):
 
@@ -34,9 +34,10 @@ class GUI(tk.Frame):
         self.test_projekt = self._projectmanager._create_project()
         self.test_projekt.name = 'test'
         self.test_projekt.notes = 'Hallo du da was machst du so?'
+        self.test_projekt.color = Color.green
         self.progui = Project_GUI(self.test_projekt, self._fr_project_overview)
         self.progui.grid(row=7, column=0, rowspan=10)
-        self.progui.configure(bg='white')
+        self.progui.configure(bg=self.test_projekt.color.value)
 
         #projects
         #self._lst_project_frames = []
@@ -57,21 +58,24 @@ class GUI(tk.Frame):
         self._bttn_create_project.grid(row=1, column=0)
         self._lb_projects.grid(row=3, column=0, rowspan=8)
 
+        #self._create_project_overview()
+
         self._root.mainloop()
 
 
     def _create_project_overview(self):
-        self._actual_project = self._get_actual_project()
+        if self._lb_projects.get('active') != '':
+            self._actual_project = self._lb_projects.get('active')
+        else:
+            self._actual_project = self.progui
+        self._actual_project_gui = Project_GUI(self._actual_project, self._fr_project_overview)
+        self._actual_project_gui.configure(bg=self._actual_project.color)
 
     def build_listboxes(self):
         i = 0
         for pro in self._projectmanager._projects:
             self._lb_projects.insert(i, pro.name)
             i +=1
-
-    def _get_actual_project(self):
-        self._lb_projects.get('active')
-
 
     def _create_project_gui(self):
 

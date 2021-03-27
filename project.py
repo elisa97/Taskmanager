@@ -1,15 +1,15 @@
 from task import *
 import enum
 
-class Color(enum.IntEnum):
-    black = 0
-    blue = 1
-    red = 2
-    green = 3
-    yellow = 4
-    purple = 5
-    orange = 6
-    white = 7
+class Color(enum.Enum):
+    black = 'black'
+    blue = 'blue'
+    red = 'red'
+    green = 'green'
+    yellow = 'yellow'
+    purple = 'purple'
+    orange = 'orange'
+    white = 'white'
 
 class Project():
 
