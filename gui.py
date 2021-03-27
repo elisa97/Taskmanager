@@ -8,7 +8,10 @@ class GUI(tk.Frame):
 
         self._root = root
         self._projectmanager = ProjectManager()
-        self.progui = Project_GUI(Project('test'), self)
+        self.test_projekt = Project('test')
+        self.test_projekt.notes = 'Hallo du da was machst du so?'
+        self.progui = Project_GUI(self.test_projekt, self)
+        self.progui.project.notes = 'Hallo Du da was machst du?'
 
         self.pack()
         self._create_elements()

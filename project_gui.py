@@ -10,7 +10,9 @@ class Project_GUI(tk.Frame):
         self._master = root
 
         #frame
-        self._fr_pro_tasks = tk.Frame(self, height=20 , width=20)
+        self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
+        self._fr_pro_notes = tk.Frame(self, height=20, width=20)
+        self._fr_pro_task_notes = tk.Frame(self._fr_pro_notes, height=20, width=20)
         
         #tasks
         self._update_tasks()
@@ -21,8 +23,10 @@ class Project_GUI(tk.Frame):
 
         #label
         self._lbl_pro_name = tk.Label(self, text=self.project.name)
-        self._lbl_pro_notes = tk.Label(self, text=self.project.notes)
+        self._lbl_dscrb_pro_notes = tk.Label(self._fr_pro_notes, text='Notes: ')
+        self._lbl_pro_notes = tk.Label(self._fr_pro_notes, text=self.project.notes)
         self._lbl_pro_no_tasks = tk.Label(self, text='All Tasks done! :-)')
+        self._lbl_dscrb_task_notes = tk.Label(self._fr_pro_task_notes, text='Task Notes: ')
 
         #button
         self._bttn_pro_delete = tk.Button(self, text='delete')
@@ -34,16 +38,24 @@ class Project_GUI(tk.Frame):
 
         #layout
         self._lbl_pro_name.grid(row=0, column=0, rowspan=2)
-        self._lbl_pro_notes.grid(row=1, column=0, rowspan=3)
-        
         self._bttn_pro_delete.grid(row=2, column=1)
         self._bttn_pro_fr_hide.grid(row=4, column=0)
         self._bttn_pro_fr_show.grid(row=4, column=1)
         self._bttn_pro_del_all_tasks.grid(row=5, column=0)
         self._bttn_pro_add_task.grid(row=6, column=0, columnspan=3)
 
+        self._lbl_dscrb_pro_notes.grid(row=0, column=0)
+        self._lbl_pro_notes.grid(row=1, column=0)
+        self._lbl_dscrb_task_notes.grid(row=0, column=0)
+
         #self._can_pro_tasks.grid(row=0, column=0, columnspan=3, rowspan=9)
+
         self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
+        self._fr_pro_notes.grid(row=0, column=5, rowspan=8)
+        self._fr_pro_task_notes.grid(row=3, column=0, rowspan=8)
+
+
+
 
         #eventhandler
         self._bttn_pro_add_task['command'] = self._create_task_gui
@@ -111,8 +123,9 @@ class Project_GUI(tk.Frame):
         self.task_window.destroy()
 
     def _update_tasks(self):
-        self._destroy_all_task_gui()
         self._design_project_gui()
+        self._destroy_all_task_gui()
+
         self._lst_task_frames = []
         for task in self.project._tasks:
             self._temp_task_gui = Task_GUI(task, self._fr_pro_tasks, self)
@@ -122,6 +135,7 @@ class Project_GUI(tk.Frame):
     def _destroy_all_task_gui(self):
         for old in self._fr_pro_tasks.winfo_children():
             old.destroy()
+
     def _delete_all_task_gui(self):
         for task in self._lst_task_frames:
             task._delete_task_gui()

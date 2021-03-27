@@ -10,41 +10,38 @@ class Task_GUI(tk.Frame):
         self.task = task
         self._master = root
 
-        #frame
-        self._fr_task_notes = tk.Frame(self, height=2, width=20)
-
         #label
         self._lbl_task_name = tk.Label(self, text=self.task.name)
         self._lbl_task_priority = tk.Label(self, text=self.task.priority)
-        self._lbl_task_notes = tk.Label(self._fr_task_notes, text=self.task.notes)
+
+        self._lbl_task_notes = tk.Label(self.super_project_gui._fr_pro_task_notes, text=self.task.notes)
 
         #button
         self._check_task_done = tk.Checkbutton(self, variable=self.task.id)
         self._bttn_task_delete = tk.Button(self, text='delete', activebackground='red')
         self._bttn_task_edit = tk.Button(self, text='edit')
         self._bttn_task_show_notes = tk.Button(self, text='show notes')
-        self._bttn_task_hide_notes = tk.Button(self._fr_task_notes, text='hide notes')
+        #self._bttn_task_hide_notes = tk.Button(self, text='hide notes')
         
         #layout
         self._check_task_done.grid(row=0, column=0)
-        self._lbl_task_name.grid(row=0, column=1, columnspan=2)
+        self._lbl_task_name.grid(row=0, column=1)
         self._lbl_task_priority.grid(row=0, column=3)
         self._bttn_task_show_notes.grid(row=0, column=4)
         self._bttn_task_edit.grid(row=0, column=5)
         self._bttn_task_delete.grid(row=0, column=6)
-        self._fr_task_notes.grid(row=0, column=0, columnspan=6)
-        
+        #self._bttn_task_hide_notes.grid(row=0, column=6)  
 
-        self._lbl_task_notes.grid(row=0, column=0, columnspan=5)
-        self._bttn_task_hide_notes.grid(row=0, column=6)
+        #self._lbl_task_notes.grid()
+
 
         #eventhandler
         self._bttn_task_delete['command'] = self._delete_task_gui
         self._check_task_done['command'] = self._do_task_gui
         self._bttn_task_edit['command'] = self._edit_task_gui
 
-        self._bttn_task_show_notes['command'] = self._fr_task_notes.grid(row=1, column=0, columnspan=6)
-        self._bttn_task_hide_notes['command'] = self._fr_task_notes.grid_forget()
+        self._bttn_task_show_notes['command'] = self._lbl_task_notes.grid(row=1, column=0, sticky='w')
+        #self._bttn_task_hide_notes['command'] = self._lbl_task_notes.grid_forget()
 
     
     def _delete_task_gui(self):
@@ -87,7 +84,7 @@ class Task_GUI(tk.Frame):
 
         #configuration
         self._entry_task_name.insert(0, self.task.name)
-        #self._entry_task_notes.insert(1, self.task.notes)
+        self._entry_task_notes.insert('1.0', self.task.notes)
 
 
         #layout
@@ -108,7 +105,7 @@ class Task_GUI(tk.Frame):
         self.task.name = self._entry_task_name.get()
         self.task.notes = self._entry_task_notes.get('1.0', 'end-1c')
         self.task.priority = self._lb_priority.get('active')
-        #self.super_project_gui._lst_task_frames.append(self)
+        self.super_project_gui._lst_task_frames.append(self)
         self.super_project_gui._update_tasks()
         self._edit_window.destroy()
 
