@@ -8,19 +8,14 @@ class GUI(tk.Frame):
 
         self._root = root
         self._projectmanager = ProjectManager()
-        self.test_projekt = Project('test')
-        self.test_projekt.notes = 'Hallo du da was machst du so?'
-        self.progui = Project_GUI(self.test_projekt, self)
-        self.progui.project.notes = 'Hallo Du da was machst du?'
 
         self.pack()
         self._create_elements()
 
-        
     def _create_project_gui(self):
+
         self.project_window = tk.Toplevel(self._root)
         self.project_window.title('Create a new Project')
-        
 
         #label
         self._lbl_set_project_name = tk.Label(self.project_window, text='Project Name: ')
@@ -60,37 +55,51 @@ class GUI(tk.Frame):
     def _create_elements(self):
 
         #frames
-        self._fr_project = tk.Frame(self)
+        self._fr_project_overview = tk.Frame(self)
+        self._fr_projects = tk.Frame(self)
 
-        self._can_projects = tk.Canvas(self._fr_project)
+        #self._can_projects = tk.Canvas(self._fr_project)
 
         #labels
-        self._lbl_title = tk.Label(self, text='Project Overview')
+        self._lbl_title = tk.Label(self._fr_project_overview, text='Project Overview')
 
         #buttons
-        self._bttn_create_project = tk.Button(self._fr_project, text='create Project')
+        self._bttn_create_project = tk.Button(self._fr_projects, text='create Project')
+
+        #listbox
+        self._lb_projects = tk.Listbox(self._fr_projects)
 
         #projects
         self._lst_project_frames = []
+        i = 0
         for pro in self._projectmanager._projects:
-            self._lst_project_frames.append(Project_GUI(pro, self._can_projects))
+            self._lst_project_frames.append(Project_GUI(pro, self._fr_project_overview))
+            self._lb_projects.insert(i, pro.name)
+            i +=1
 
-    
         #event handler
         self._bttn_create_project['command'] = self._create_project_gui
 
         #layout
 
         self._lbl_title.grid(row=0, column=0, columnspan=3)
-        self._fr_project.grid(row=1, column=0, columnspan=3, rowspan=5)
+
+        self._fr_project_overview.grid(row=0, column=2, rowspan=5)
+        self._fr_projects.grid(row=0, column=0)
 
 
         self._bttn_create_project.grid(row=1, column=0)
+        self._lb_projects.grid(row=3, column=0, rowspan=8)
 
+        #test
+        self.test_projekt = Project('test')
+        self.test_projekt.notes = 'Hallo du da was machst du so?'
+        self.progui = Project_GUI(self.test_projekt, self._fr_project_overview)
+        self.progui.project.notes = 'Hallo Du da was machst du?'
         self.progui.grid(row=7, column=0, rowspan=10)
-
-        #configuration
         self.progui.configure(bg='white')
+        self._projectmanager._projects.append(self.progui)
+        self._lst_project_frames.append(self.progui)
 
 
         self._root.mainloop()

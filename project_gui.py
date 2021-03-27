@@ -14,12 +14,9 @@ class Project_GUI(tk.Frame):
         self._fr_pro_notes = tk.Frame(self, height=20, width=20)
         self._fr_pro_task_notes = tk.Frame(self._fr_pro_notes, height=20, width=20)
         
-        #tasks
         self._update_tasks()
 
     def _design_project_gui(self):
-        #canvas
-        #self._can_pro_tasks = tk.Canvas(self._fr_pro_tasks)
 
         #label
         self._lbl_pro_name = tk.Label(self, text=self.project.name)
@@ -45,14 +42,12 @@ class Project_GUI(tk.Frame):
         self._bttn_pro_add_task.grid(row=6, column=0, columnspan=3)
 
         self._lbl_dscrb_pro_notes.grid(row=0, column=0)
-        self._lbl_pro_notes.grid(row=1, column=0)
+        self._lbl_pro_notes.grid(row=1, column=0, rowspan=5)
         self._lbl_dscrb_task_notes.grid(row=0, column=0)
 
-        #self._can_pro_tasks.grid(row=0, column=0, columnspan=3, rowspan=9)
-
         self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
-        self._fr_pro_notes.grid(row=0, column=5, rowspan=8)
-        self._fr_pro_task_notes.grid(row=3, column=0, rowspan=8)
+        self._fr_pro_notes.grid(row=0, column=5, rowspan=8, sticky='n')
+        self._fr_pro_task_notes.grid(row=8, column=0, sticky='s')
 
 
 

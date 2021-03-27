@@ -7,6 +7,7 @@ if __name__ == '__main__':
 
     new_projectmanager = ProjectManager()
     new_project = new_projectmanager._create_project()
+    new_project.name = 'Hallo'
 
     new_task = new_project.create_task()
     task_2 = new_project.create_task()
