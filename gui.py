@@ -31,13 +31,13 @@ class GUI(tk.Frame):
         self._lb_projects = tk.Listbox(self._fr_projects)
 
         #test
-        self.test_projekt = self._projectmanager._create_project()
+        '''self.test_projekt = self._projectmanager._create_project()
         self.test_projekt.name = 'test'
         self.test_projekt.notes = 'Hallo du da was machst du so?'
         self.test_projekt.color = Color.green
         self.progui = Project_GUI(self.test_projekt, self._fr_project_overview)
         self.progui.grid(row=7, column=0, rowspan=10)
-        self.progui.configure(bg=self.test_projekt.color.value)
+        self.progui.configure(bg=self.test_projekt.color.value)'''
 
         #projects
         #self._lst_project_frames = []
@@ -63,13 +63,13 @@ class GUI(tk.Frame):
         self._root.mainloop()
 
 
-    def _create_project_overview(self):
+    '''def _create_project_overview(self):
         if self._lb_projects.get('active') != '':
             self._actual_project = self._lb_projects.get('active')
         else:
             self._actual_project = self.progui
         self._actual_project_gui = Project_GUI(self._actual_project, self._fr_project_overview)
-        self._actual_project_gui.configure(bg=self._actual_project.color)
+        self._actual_project_gui.configure(bg=self._actual_project.color)'''
 
     def build_listboxes(self):
         i = 0
@@ -118,6 +118,7 @@ class GUI(tk.Frame):
         #eventhandler
         self._bttn_save_project['command'] = self.save_new_project
         self._bttn_cancel_project['command'] = self.project_window.destroy
+        self._lb_color_project.bind('<<ListboxSelect>>', self._update_project)
 
     def save_new_project(self):
         self._new_project = self._projectmanager._create_project()
@@ -131,7 +132,10 @@ class GUI(tk.Frame):
         self._lb_projects.delete(0, tk.END)
         self.build_listboxes()
 
-    def _update_project(self):
+    def _update_project(self, event=tk.Event):
+        self._selected_lst = self._lb_projects.curselection()
+        self._selected_item = self._selected_lst[0]
+        self._selected_pro_name = self._lb_projects.get(self._selected_item)
         self._create_elements()
         #self._destroy_project_gui()
 

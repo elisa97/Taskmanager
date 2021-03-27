@@ -9,6 +9,9 @@ class Project_GUI(tk.Frame):
         self.project = project
         self._master = root
 
+        self._check_var = tk.BooleanVar()
+        self._check_var.set(False)
+
         #frame
         self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
         self._fr_pro_overview = tk.Frame(self, height=20, width=20, bg=self.project.color.value)
@@ -31,14 +34,12 @@ class Project_GUI(tk.Frame):
         self._bttn_pro_edit = tk.Button(self._fr_pro_overview, text='edit')
         self._bttn_pro_del_all_tasks = tk.Button(self._fr_pro_overview, text='delete all Tasks')
         self._bttn_pro_add_task = tk.Button(self._fr_pro_overview, text='+ add new Task', width=49)
-        self._bttn_pro_fr_show = tk.Button(self._fr_pro_overview, text='show Tasks')
-        self._bttn_pro_fr_hide = tk.Button(self._fr_pro_overview, text='hide Tasks')
+        self._check_pro_fr_hide = tk.Checkbutton(self._fr_pro_overview, text='hide Tasks', var=self._check_var)
 
         #layout
         self._lbl_pro_name.grid(row=0, column=0, rowspan=2)
         self._bttn_pro_delete.grid(row=2, column=1)
-        self._bttn_pro_fr_hide.grid(row=4, column=0)
-        self._bttn_pro_fr_show.grid(row=4, column=1)
+        self._check_pro_fr_hide.grid(row=4, column=0)
         self._bttn_pro_del_all_tasks.grid(row=5, column=0)
         self._bttn_pro_add_task.grid(row=6, column=0,sticky='w', columnspan=3)
 
@@ -57,18 +58,13 @@ class Project_GUI(tk.Frame):
         #eventhandler
         self._bttn_pro_add_task['command'] = self._create_task_gui
         self._bttn_pro_del_all_tasks['command'] = self._delete_all_task_gui
-        self._bttn_pro_fr_hide['command'] = lambda: self._fr_pro_tasks.grid_forget()
-        self._bttn_pro_fr_show['command'] = lambda: self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
+        self._check_pro_fr_hide['command'] = self._hide_task
 
-    '''def hide_task(self):
-        self._bttn_pro_fr_hide.configure(text='show tasks')
-        self._fr_pro_tasks.grid_forget()
-        self._bttn_pro_fr_hide['command'] = 
-    
-    def show_task(self):
-        self._bttn_pro_fr_hide.configure(text='hide tasks')
-        self._bttn_pro_fr_hide.grid(row=8, column=0, columnspan=3, rowspan=10)'''
-
+    def _hide_task(self):
+        if self._check_var.get():
+            self._fr_pro_tasks.grid_forget()
+        else:
+            self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
        
     def _create_task_gui(self):
 
