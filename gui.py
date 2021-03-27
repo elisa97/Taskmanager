@@ -118,7 +118,8 @@ class GUI(tk.Frame):
         #eventhandler
         self._bttn_save_project['command'] = self.save_new_project
         self._bttn_cancel_project['command'] = self.project_window.destroy
-        self._lb_color_project.bind('<<ListboxSelect>>', self._update_project)
+        self._lb_projects.bind('<<ListboxSelect>>', self._update_project)
+        #self._lb_projects['command'] = self._update_project
 
     def save_new_project(self):
         self._new_project = self._projectmanager._create_project()
@@ -132,14 +133,21 @@ class GUI(tk.Frame):
         self._lb_projects.delete(0, tk.END)
         self.build_listboxes()
 
-    def _update_project(self, event=tk.Event):
-        self._selected_lst = self._lb_projects.curselection()
-        self._selected_item = self._selected_lst[0]
-        self._selected_pro_name = self._lb_projects.get(self._selected_item)
+    def _update_project(self, event):
+        #self._selected_lst = self._lb_projects.curselection()
+        #self._selected_item = self._selected_lst[0]
+        self._selected_pro_name = self._lb_projects.get('active')
+        self.found_project = None
+        for project in self._projectmanager._projects:
+            if project.name == self._selected_pro_name:
+                self.found_project = project
+                break
+
+
         self._create_elements()
         #self._destroy_project_gui()
 
-        #self._current_project_gui = Project_GUI(self._actual_project, self._fr_project_overview)
+        self._new_project_gui = Project_GUI(self.found_project, self._fr_project_overview)
 
 
     def _destroy_project_gui(self):
