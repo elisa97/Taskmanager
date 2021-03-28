@@ -15,24 +15,24 @@ class GUI(tk.Frame):
     def _create_elements(self):
 
         #frames
-        self._fr_project_overview = tk.Frame(self)
-        self._fr_projects = tk.Frame(self)
+        self._fr_project = tk.Frame(self)
+        self._fr_projectmanager = tk.Frame(self)
 
         #labels
-        self._lbl_title = tk.Label(self._fr_project_overview, text='Project Overview')
+        self._lbl_title = tk.Label(self._fr_project, text='Project Overview')
 
         #buttons
-        self._bttn_create_project = tk.Button(self._fr_projects, text='create Project')
+        self._bttn_create_project = tk.Button(self._fr_projectmanager, text='create Project')
 
         #listbox
-        self._lb_projects = tk.Listbox(self._fr_projects)
+        self._lb_projects = tk.Listbox(self._fr_projectmanager)
 
         #test
         '''self.test_projekt = self._projectmanager._create_project()
         self.test_projekt.name = 'test'
         self.test_projekt.notes = 'Hallo du da was machst du so?'
         self.test_projekt.color = Color.green
-        self.progui = Project_GUI(self.test_projekt, self._fr_project_overview)
+        self.progui = Project_GUI(self.test_projekt, self._fr_project)
         self.progui.grid(row=7, column=0, rowspan=10)
         self.progui.configure(bg=self.test_projekt.color.value)'''
 
@@ -48,8 +48,8 @@ class GUI(tk.Frame):
 
         self._lbl_title.grid(row=0, column=0, columnspan=3)
 
-        self._fr_project_overview.grid(row=0, column=2, rowspan=5)
-        self._fr_projects.grid(row=0, column=0)
+        self._fr_project.grid(row=0, column=2, rowspan=5)
+        self._fr_projectmanager.grid(row=0, column=0)
 
 
         self._bttn_create_project.grid(row=1, column=0)
@@ -60,11 +60,6 @@ class GUI(tk.Frame):
         self._root.mainloop()
 
 
-    def build_listboxes(self):
-        i = 0
-        for pro in self._projectmanager._projects:
-            self._lb_projects.insert(i, pro.name)
-            i +=1
 
     def _create_project_gui(self):
 
@@ -118,13 +113,21 @@ class GUI(tk.Frame):
         self._update_listbox()
         self.project_window.destroy()
 
+    def build_listboxes(self):
+        i = 0
+        for pro in self._projectmanager._projects:
+            self._lb_projects.insert(i, pro.name)
+            i +=1
+
     def _update_listbox(self):
         self._lb_projects.delete(0, tk.END)
         self.build_listboxes()
 
     def _update_project(self, event):
-        #self._selected_lst = self._lb_projects.curselection()
-        #self._selected_item = self._selected_lst[0]
+        '''
+        Build the new Project GUI Overview
+        '''
+        self._delete_project_overview()
         self._selected_pro_name = self._lb_projects.get('active')
         self.found_project = None
         for project in self._projectmanager._projects:
@@ -132,13 +135,10 @@ class GUI(tk.Frame):
                 self.found_project = project
                 break
 
-        #self._destroy_project_gui()
-        self._new_project_gui = Project_GUI(self.found_project, self._fr_project_overview)
+        self._new_project_gui = Project_GUI(self.found_project, self._fr_project)
         self._new_project_gui.grid(row=7, column=0, rowspan=10)
-        self._create_elements()
 
+    def _delete_project_overview(self):
+        'to do'
 
-    '''def _destroy_project_gui(self):
-        for old in self._fr_project_overview.winfo_children():
-            old.destroy()'''
 

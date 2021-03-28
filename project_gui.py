@@ -135,7 +135,6 @@ class Project_GUI(tk.Frame):
 
     def update_tasks(self):
         '''
-        Build the Project GUI elements
         Build the new Task GUIs after deleteting all Task GUIs
         '''
         self._delete_all_task_gui()
