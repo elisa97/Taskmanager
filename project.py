@@ -28,12 +28,12 @@ class Project():
     '''
 
 
-    def __init__(self, name, projectmanager, color=Color.black, tasks=[]):
+    def __init__(self, name, projectmanager, color=Color.black):
         self.name = name
         self.projectmanager = projectmanager
         self.color = color
         self.notes = ''
-        self._tasks = tasks
+        self._tasks = []
 
     
     def is_empty(self):
@@ -46,9 +46,9 @@ class Project():
         '''
         Returns a new Task
         '''
-        new_task = Task('Default Task', self)
-        self._tasks.append(new_task)
-        return new_task
+        self.new_task = Task('Default Task', self)
+        self._tasks.append(self.new_task)
+        return self.new_task
 
     def delete_task(self, task):
         '''

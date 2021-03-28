@@ -9,17 +9,17 @@ class ProjectManager():
     can be constructed with 'ProjectManager(name)'
     '''
 
-    def __init__(self, name, projects=[]):
+    def __init__(self, name):
         self.name = name
-        self._projects = projects
+        self._projects = []
 
     def _create_project(self):
         '''
         Returns a new Project
         '''
-        new_project = Project('Default Project', self)
-        self._projects.append(new_project)
-        return new_project
+        self.new_project = Project('Default Project', self)
+        self._projects.append(self.new_project)
+        return self.new_project
 
     def _delete_project(self, project):
         '''
