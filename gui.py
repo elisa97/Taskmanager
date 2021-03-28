@@ -88,7 +88,8 @@ class GUI(tk.Frame):
         self._new_project = self._projectmanager._create_project()
         self._new_project.name = self._entry_project_name.get()
         self._new_project.notes = self._entry_project_notes.get('1.0', 'end-1c')
-        self._new_project.color = self._lb_color_project.get('active')
+        print(self._lb_color_project.get('active'))
+        self._new_project.color = find_color(self._lb_color_project.get('active'))
         self._update_listbox()
         self.project_window.destroy()
 
@@ -119,6 +120,7 @@ class GUI(tk.Frame):
         self._update_listbox()
 
     def _delete_project_overview(self):
-        self._fr_project.
+        for widget in self._fr_project.winfo_children():
+            widget.destroy()
 
 

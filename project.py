@@ -14,6 +14,11 @@ class Color(enum.Enum):
     orange = 'orange'
     white = 'white'
 
+def find_color(color_string):
+    for col in Color:
+        if col.value == color_string:
+            return col
+
 class Project():
     '''
     Project Object contains:

@@ -150,7 +150,7 @@ class Project_GUI(tk.Frame):
         Deletes all Tasks and destroys all Task GUIs
         '''
         for task in self._lst_task_frames:
-            task._delete_task_gui()
+            task.delete_task_gui()
 
 
     def _hide_task(self):
