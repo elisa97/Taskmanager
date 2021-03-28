@@ -19,9 +19,12 @@ class Task_GUI(tk.Frame):
         self._check_var.set(False)
 
         self.configure(bd=1,relief='groove')
+        self.build_task_gui()
+
+    def build_task_gui(self):
 
         #label
-        self._lbl_task_name = tk.Label(self, text=self.task.name, width=20, anchor='w')
+        self._lbl_name = tk.Label(self, text=self.task.name, width=20, anchor='w')
 
         self._lbl_task_notes = tk.Label(self.super_project_gui._fr_pro_task_notes, text=self.task.notes)
 
@@ -33,7 +36,7 @@ class Task_GUI(tk.Frame):
         
         #layout
         self._check_task_done.grid(row=0, column=0, sticky='w', padx=2)
-        self._lbl_task_name.grid(row=0, column=1)
+        self._lbl_name.grid(row=0, column=1)
         self._check_task_show_notes.grid(row=0, column=4)
         self._bttn_task_edit.grid(row=0, column=5)
         self._bttn_task_delete.grid(row=0, column=6, sticky='e')
@@ -69,9 +72,9 @@ class Task_GUI(tk.Frame):
 
         
         #label
-        self._lbl_set_task_name = tk.Label(self._edit_window, text='Task Name: ')
-        self._lbl_set_task_notes = tk.Label(self._edit_window, text='Notes: ')
-        self._lbl_set_task_priority = tk.Label(self._edit_window, text='Priority :')
+        self._lbl_dscrb_name = tk.Label(self._edit_window, text='Task Name: ')
+        self._lbl_dscrb_notes = tk.Label(self._edit_window, text='Notes: ')
+        self._lbl_dscrb_priority = tk.Label(self._edit_window, text='Priority :')
 
 
         #button
@@ -99,10 +102,10 @@ class Task_GUI(tk.Frame):
 
 
         #layout
-        self._lbl_set_task_name.grid(row=0, column=0, rowspan=2)
+        self._lbl_dscrb_name.grid(row=0, column=0, rowspan=2)
         self._entry_task_name.grid(row=0, column=1, rowspan=2)
-        self._lbl_set_task_notes.grid(row=2, column=0)
-        self._lbl_set_task_priority.grid(row=2, column=4)
+        self._lbl_dscrb_notes.grid(row=2, column=0)
+        self._lbl_dscrb_priority.grid(row=2, column=4)
         self._entry_task_notes.grid(row=3, column=0, columnspan=3, rowspan=5)
         self._lb_priority.grid(row=3, column=4, rowspan=4)
         self._bttn_cancel_task.grid(row=8, column=5)
@@ -134,18 +137,18 @@ class Task_GUI(tk.Frame):
         '''
         if self.task.priority == 'high':
             self.configure(bg='red')
-            self._lbl_task_name.configure(bg='red')
+            self._lbl_name.configure(bg='red')
             self._check_task_done.configure(bg='red')
         elif self.task.priority == 'medium':
             self.configure(bg='yellow')
-            self._lbl_task_name.configure(bg='yellow')
+            self._lbl_name.configure(bg='yellow')
             self._check_task_done.configure(bg='yellow')
         elif self.task.priority == 'low':
             self.configure(bg='green')
-            self._lbl_task_name.configure(bg='green')
+            self._lbl_name.configure(bg='green')
             self._check_task_done.configure(bg='green')
     
-    def _delete_task_gui(self):
+    def delete_task_gui(self):
         '''
         Deletes the Task and destroys the Task GUI
         '''
