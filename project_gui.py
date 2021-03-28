@@ -26,14 +26,14 @@ class Project_GUI(tk.Frame):
         '''
         Creates the Project GUI labels, buttons, ...
         '''
-        self._fr_pro_overview = tk.Frame(self, height=20, width=20, bg=self._project.color)
+        self._fr_pro_overview = tk.Frame(self, height=20, width=20, bg=self._project.color.value)
         self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
 
         self._fr_pro_overview.grid(row=0, column=0, columnspan=3, rowspan=8)
         self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
 
         #_fr_pro_overview
-        self._fr_pro_notes = tk.Frame(self._fr_pro_overview, height=20, width=20, bg=self._project.color, bd=2, relief='groove')
+        self._fr_pro_notes = tk.Frame(self._fr_pro_overview, height=20, width=20, bg=self._project.color.value, bd=2, relief='groove')
 
         self._lbl_pro_name = tk.Label(self._fr_pro_overview, text=self._project.name)
         self._bttn_pro_del_all_tasks = tk.Button(self._fr_pro_overview, text='delete all Tasks')
@@ -137,9 +137,9 @@ class Project_GUI(tk.Frame):
         '''
         Build the new Task GUIs after deleteting all Task GUIs
         '''
+        self._lst_task_frames = []
         self._delete_all_task_gui()
 
-        self._lst_task_frames = []
         for task in self._project._tasks:
             self._temp_task_gui = Task_GUI(task, self._fr_pro_task_list, self)
             self._temp_task_gui.grid()
@@ -151,7 +151,7 @@ class Project_GUI(tk.Frame):
         '''
         for task in self._lst_task_frames:
             task._delete_task_gui()
-        self.update_tasks()
+
 
     def _hide_task(self):
         if self._check_var.get():

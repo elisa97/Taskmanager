@@ -18,48 +18,28 @@ class GUI(tk.Frame):
         self._fr_project = tk.Frame(self)
         self._fr_projectmanager = tk.Frame(self)
 
-        #labels
-        self._lbl_title = tk.Label(self._fr_project, text='Project Overview')
+        self._fr_project.grid(row=0, column=2, rowspan=5)
+        self._fr_projectmanager.grid(row=0, column=0)
 
-        #buttons
+        #elements projectmanager
         self._bttn_create_project = tk.Button(self._fr_projectmanager, text='create Project')
-
-        #listbox
+        self._bttn_edit_project = tk.Button(self._fr_projectmanager, text='edit Project')
+        self._bttn_delete_project = tk.Button(self._fr_projectmanager, text='delete Project')
         self._lb_projects = tk.Listbox(self._fr_projectmanager)
 
-        #test
-        '''self.test_projekt = self._projectmanager._create_project()
-        self.test_projekt.name = 'test'
-        self.test_projekt.notes = 'Hallo du da was machst du so?'
-        self.test_projekt.color = Color.green
-        self.progui = Project_GUI(self.test_projekt, self._fr_project)
-        self.progui.grid(row=7, column=0, rowspan=10)
-        self.progui.configure(bg=self.test_projekt.color.value)'''
-
-        #projects
-        #self._lst_project_frames = []
-
-        self._update_listbox()
+        #layout
+        self._lb_projects.grid(row=3, column=0, rowspan=8)
+        self._bttn_create_project.grid(row=1, column=0)
+        self._bttn_edit_project.grid(row=12, column=0)
+        self._bttn_delete_project.grid(row=14, column=0)
 
         #event handler
         self._bttn_create_project['command'] = self._create_project_gui
 
-        #layout
-
-        self._lbl_title.grid(row=0, column=0, columnspan=3)
-
-        self._fr_project.grid(row=0, column=2, rowspan=5)
-        self._fr_projectmanager.grid(row=0, column=0)
-
-
-        self._bttn_create_project.grid(row=1, column=0)
-        self._lb_projects.grid(row=3, column=0, rowspan=8)
-
+        self._update_listbox()
         #self._create_project_overview()
 
         self._root.mainloop()
-
-
 
     def _create_project_gui(self):
 
@@ -103,7 +83,6 @@ class GUI(tk.Frame):
         self._bttn_save_project['command'] = self.save_new_project
         self._bttn_cancel_project['command'] = self.project_window.destroy
         self._lb_projects.bind('<<ListboxSelect>>', self._update_project)
-        #self._lb_projects['command'] = self._update_project
 
     def save_new_project(self):
         self._new_project = self._projectmanager._create_project()
@@ -135,10 +114,11 @@ class GUI(tk.Frame):
                 self.found_project = project
                 break
 
-        self._new_project_gui = Project_GUI(self.found_project, self._fr_project)
-        self._new_project_gui.grid(row=7, column=0, rowspan=10)
+        self._new_project_gui = Project_GUI(self.found_project, self._fr_project, self)
+        self._new_project_gui.grid()
+        self._update_listbox()
 
     def _delete_project_overview(self):
-        'to do'
+        self._fr_project.
 
 

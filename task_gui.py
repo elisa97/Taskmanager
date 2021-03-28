@@ -45,7 +45,7 @@ class Task_GUI(tk.Frame):
 
 
         #eventhandler
-        self._bttn_task_delete['command'] = self._delete_task_gui
+        self._bttn_task_delete['command'] = self.delete_task_gui
         self._check_task_done['command'] = self._do_task_gui
         self._bttn_task_edit['command'] = self._edit_task_gui
         self._check_task_show_notes['command'] = self._show_task_notes
@@ -112,7 +112,7 @@ class Task_GUI(tk.Frame):
         self._task.name = self._entry_task_name.get()
         self._task.notes = self._entry_task_notes.get('1.0', 'end-1c')
         self._task.priority = self._lb_priority.get('active')
-        self._super_project_gui._update_tasks()
+        self._super_project_gui.update_tasks()
         self._edit_window.destroy()
 
 
@@ -157,3 +157,4 @@ class Task_GUI(tk.Frame):
         '''
         self._task.do_task()
         self.destroy()
+
