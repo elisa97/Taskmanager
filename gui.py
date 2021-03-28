@@ -23,18 +23,22 @@ class GUI(tk.Frame):
 
         #elements projectmanager
         self._bttn_create_project = tk.Button(self._fr_projectmanager, text='create Project')
+        self._bttn_show_project = tk.Button(self._fr_projectmanager, text='show Project')
         self._bttn_edit_project = tk.Button(self._fr_projectmanager, text='edit Project')
         self._bttn_delete_project = tk.Button(self._fr_projectmanager, text='delete Project')
         self._lb_projects = tk.Listbox(self._fr_projectmanager)
 
         #layout
         self._lb_projects.grid(row=3, column=0, rowspan=8)
-        self._bttn_create_project.grid(row=1, column=0)
+        self._bttn_create_project.grid(row=0, column=0)
+        self._bttn_show_project.grid(row=1, column=0)
         self._bttn_edit_project.grid(row=12, column=0)
         self._bttn_delete_project.grid(row=14, column=0)
 
         #event handler
         self._bttn_create_project['command'] = self._create_project_gui
+        self._bttn_show_project['command'] = self._update_project
+
 
         self._update_listbox()
         #self._create_project_overview()
@@ -82,13 +86,11 @@ class GUI(tk.Frame):
         #eventhandler
         self._bttn_save_project['command'] = self.save_new_project
         self._bttn_cancel_project['command'] = self.project_window.destroy
-        self._lb_projects.bind('<<ListboxSelect>>', self._update_project)
 
     def save_new_project(self):
         self._new_project = self._projectmanager._create_project()
         self._new_project.name = self._entry_project_name.get()
         self._new_project.notes = self._entry_project_notes.get('1.0', 'end-1c')
-        print(self._lb_color_project.get('active'))
         self._new_project.color = find_color(self._lb_color_project.get('active'))
         self._update_listbox()
         self.project_window.destroy()
@@ -103,7 +105,8 @@ class GUI(tk.Frame):
         self._lb_projects.delete(0, tk.END)
         self.build_listboxes()
 
-    def _update_project(self, event):
+
+    def _update_project(self):
         '''
         Build the new Project GUI Overview
         '''
