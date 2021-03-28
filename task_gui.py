@@ -54,6 +54,10 @@ class Task_GUI(tk.Frame):
 
 
     def _edit_task_gui(self):
+        '''
+        Generates a window where Task can be edited and saved
+        Returns the edited or original Task 
+        '''
         self._edit_window = tk.Toplevel(self._master)
         self._edit_window.title('Edit Task')
 
@@ -103,6 +107,10 @@ class Task_GUI(tk.Frame):
         self._bttn_cancel_task['command'] = self._edit_window.destroy
         
     def _save_task(self):
+        '''
+        Returns the edited Task
+        Writes the entry information from the Edit Task Window in the Task
+        '''
         self.task.name = self._entry_task_name.get()
         self.task.notes = self._entry_task_notes.get('1.0', 'end-1c')
         self.task.priority = self._lb_priority.get('active')
@@ -111,6 +119,13 @@ class Task_GUI(tk.Frame):
         self._edit_window.destroy()
 
     def _get_task_color(self):
+        '''
+        Set the background color of 
+        Task Gui, Label Task Name, Checkbutton Task Done
+        to red if Task Priority is 'high',
+        yellow if Task Priority is 'medium',
+        green if Task Priority is 'low'
+        '''
         if self.task.priority == 'high':
             self.configure(bg='red')
             self._lbl_task_name.configure(bg='red')
@@ -125,9 +140,15 @@ class Task_GUI(tk.Frame):
             self._check_task_done.configure(bg='green')
     
     def _delete_task_gui(self):
+        '''
+        Deletes the Task and destroys the Task GUI
+        '''
         self.task.project.delete_task(self.task)
         self.destroy()
 
     def _do_task_gui(self):
+        '''
+        Set Task State to Done and desrtoys Task GUI
+        '''
         self.task.do_task()
         self.destroy()
