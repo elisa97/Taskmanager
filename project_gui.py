@@ -138,7 +138,7 @@ class Project_GUI(tk.Frame):
         Build the new Task GUIs after deleteting all Task GUIs
         '''
         self._lst_task_frames = []
-        self._delete_all_task_gui()
+        self._destroy_all_task_frames()
 
         for task in self._project._tasks:
             self._temp_task_gui = Task_GUI(task, self._fr_pro_task_list, self)
@@ -151,6 +151,10 @@ class Project_GUI(tk.Frame):
         '''
         for task in self._lst_task_frames:
             task.delete_task_gui()
+    
+    def _destroy_all_task_frames(self):
+        for task in self._fr_pro_task_list.winfo_children():
+            task.destroy()
 
 
     def _hide_task(self):
