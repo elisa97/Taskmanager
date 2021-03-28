@@ -2,12 +2,19 @@ import tkinter as tk
 from task_gui import *
 
 class Project_GUI(tk.Frame):
+    '''
+    Project GUI Object contains:
+    project, super_projectmanager_gui, master, check_var
 
-    def __init__(self, project, root):
+    can be constructed with 'Project_GUI(project, root, super_projectmanager_gui)'
+    '''
+
+    def __init__(self, project, root, super_projectmanager_gui):
         super().__init__(root)
 
         self.project = project
         self._master = root
+        self.super_projectmanager_gui = super_projectmanager_gui
 
         self._check_var = tk.BooleanVar()
         self._check_var.set(False)
@@ -19,6 +26,9 @@ class Project_GUI(tk.Frame):
         self._update_tasks()        
 
     def _design_project_gui(self):
+        '''
+        Creates the Project GUI labels, buttons, ...
+        '''
 
         self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
         self._fr_pro_notes = tk.Frame(self, height=20, width=20, bg=self.project.color, bd=2, relief='groove')
@@ -69,6 +79,10 @@ class Project_GUI(tk.Frame):
             self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
        
     def _create_task_gui(self):
+        '''
+        Generates a window where a new Task can be generated
+        Returns the new Task or nothing
+        '''
 
         self.task_window = tk.Toplevel(self._master)
         self.task_window.title('Create Task')
@@ -115,6 +129,10 @@ class Project_GUI(tk.Frame):
         self._bttn_cancel_task['command'] = self.task_window.destroy
         
     def _save_task(self):
+        '''
+        Returns the saved Task
+        Writes the entry information from the Create Task Window in a new Task
+        '''
         self._new_task = self.project.create_task()
         self._new_task.name = self._entry_task_name.get()
         self._new_task.notes = self._entry_task_notes.get('1.0', 'end-1c')
@@ -127,6 +145,9 @@ class Project_GUI(tk.Frame):
         self.task_window.destroy()
 
     def _update_tasks(self):
+        '''
+
+        '''
         self._design_project_gui()
         self._destroy_all_task_gui()
 
@@ -137,10 +158,16 @@ class Project_GUI(tk.Frame):
             self._lst_task_frames.append(self._temp_task_gui)
 
     def _destroy_all_task_gui(self):
+        '''
+        ????
+        '''
         for old in self._fr_pro_tasks.winfo_children():
             old.destroy()
 
     def _delete_all_task_gui(self):
+        '''
+        Deletes all Tasks and destroys all Task GUIs
+        '''
         for task in self._lst_task_frames:
             task._delete_task_gui()
         self._update_tasks()

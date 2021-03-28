@@ -2,12 +2,18 @@ import tkinter as tk
 from task import *
 
 class Task_GUI(tk.Frame):
+    '''
+    Task GUI Object contains:
+    task, super_project_gui, master, check_var
+
+    can be constructed with 'Task_GUI(task, root, super_project_gui)'
+    '''
     
     def __init__(self, task, root, super_project_gui):
         super().__init__(root)
 
-        self.super_project_gui = super_project_gui
         self.task = task
+        self.super_project_gui = super_project_gui
         self._master = root
         self._check_var = tk.BooleanVar()
         self._check_var.set(False)
