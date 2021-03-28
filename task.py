@@ -47,7 +47,7 @@ class Task():
         '''
         return str( 'Task Name' + self.name + \
                     ' Project:' + self.project.name + \
-                    ' State:' + self.state + \
-                    ' Piority' + self.priority + \
+                    ' State:' + repr(self.state) + \
+                    ' Piority' + repr(self.priority) + \
                     ' Notes: ' + self.notes)
 

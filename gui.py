@@ -3,12 +3,11 @@ from project_manager import *
 from project_gui import *
 
 class GUI(tk.Frame):
-    def __init__(self, root=tk.Tk()):
+    def __init__(self, projectmanger, root=tk.Tk()):
         super().__init__(root)
 
         self._root = root
-        self._projectmanager = ProjectManager()
-
+        self._projectmanager = projectmanger
 
         self.pack()
         self._create_elements()

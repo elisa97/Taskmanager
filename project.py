@@ -70,7 +70,7 @@ class Project():
             printed_tasks += str(task)
             printed_tasks += '\n'
         return str( ' Name: ' + self.name + \
-                    ' ProjectManager: ' + self.projectmanager +\
+                    ' ProjectManager: ' + self.projectmanager.name +\
                     ' Color: ' + repr(self.color) + \
                     ' Notes: ' + self.notes + \
                     ' Tasks: \n' + printed_tasks)

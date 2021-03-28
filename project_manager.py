@@ -17,7 +17,7 @@ class ProjectManager():
         '''
         Returns a new Project
         '''
-        new_project = Project('Default Project')
+        new_project = Project('Default Project', self)
         self._projects.append(new_project)
         return new_project
 

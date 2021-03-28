@@ -12,8 +12,8 @@ class Task_GUI(tk.Frame):
     def __init__(self, task, root, super_project_gui):
         super().__init__(root)
 
-        self.task = task
-        self.super_project_gui = super_project_gui
+        self._task = task
+        self._super_project_gui = super_project_gui
         self._master = root
         self._check_var = tk.BooleanVar()
         self._check_var.set(False)
@@ -24,15 +24,14 @@ class Task_GUI(tk.Frame):
     def build_task_gui(self):
 
         #label
-        self._lbl_name = tk.Label(self, text=self.task.name, width=20, anchor='w')
-
-        self._lbl_task_notes = tk.Label(self.super_project_gui._fr_pro_task_notes, text=self.task.notes)
+        self._lbl_name = tk.Label(self, text=self._task.name, width=20, anchor='w')
+        self._lbl_task_notes = tk.Label(self._super_project_gui._fr_pro_task_notes, text=self._task.notes)
 
         #button
-        self._check_task_done = tk.Checkbutton(self, variable=self.task.id)
+        self._check_task_done = tk.Checkbutton(self, variable=self._task.id)
         self._bttn_task_delete = tk.Button(self, text='delete', activebackground='red')
         self._bttn_task_edit = tk.Button(self, text='edit')
-        self._check_task_show_notes = tk.Checkbutton(self, variable=self.task.id, text='show notes', var=self._check_var)
+        self._check_task_show_notes = tk.Checkbutton(self, variable=self._task.id, text='show notes', var=self._check_var)
         
         #layout
         self._check_task_done.grid(row=0, column=0, sticky='w', padx=2)
@@ -42,7 +41,6 @@ class Task_GUI(tk.Frame):
         self._bttn_task_delete.grid(row=0, column=6, sticky='e')
 
         self._lbl_task_notes.grid_forget()
-
         self._get_task_color()
 
 
@@ -50,16 +48,7 @@ class Task_GUI(tk.Frame):
         self._bttn_task_delete['command'] = self._delete_task_gui
         self._check_task_done['command'] = self._do_task_gui
         self._bttn_task_edit['command'] = self._edit_task_gui
-
         self._check_task_show_notes['command'] = self._show_task_notes
-
-        #self._bttn_task_hide_notes['command'] = self._lbl_task_notes.grid_forget()
-
-    def _show_task_notes(self):
-        if self._check_var.get():
-            self._lbl_task_notes.grid(row=1, column=0, sticky='w')
-        else:
-            self._lbl_task_notes.grid_forget()
 
 
     def _edit_task_gui(self):
@@ -97,8 +86,8 @@ class Task_GUI(tk.Frame):
         self._entry_task_notes = tk.Text(self._edit_window, width=20, height=5)
 
         #configuration
-        self._entry_task_name.insert(0, self.task.name)
-        self._entry_task_notes.insert('1.0', self.task.notes)
+        self._entry_task_name.insert(0, self._task.name)
+        self._entry_task_notes.insert('1.0', self._task.notes)
 
 
         #layout
@@ -120,12 +109,19 @@ class Task_GUI(tk.Frame):
         Returns the edited Task
         Writes the entry information from the Edit Task Window in the Task
         '''
-        self.task.name = self._entry_task_name.get()
-        self.task.notes = self._entry_task_notes.get('1.0', 'end-1c')
-        self.task.priority = self._lb_priority.get('active')
-        self.super_project_gui._lst_task_frames.append(self)
-        self.super_project_gui._update_tasks()
+        self._task.name = self._entry_task_name.get()
+        self._task.notes = self._entry_task_notes.get('1.0', 'end-1c')
+        self._task.priority = self._lb_priority.get('active')
+        self._super_project_gui._update_tasks()
         self._edit_window.destroy()
+
+
+    def _show_task_notes(self):
+        if self._check_var.get():
+            self._lbl_task_notes.grid(row=1, column=0, sticky='w')
+        else:
+            self._lbl_task_notes.grid_forget()
+
 
     def _get_task_color(self):
         '''
@@ -135,15 +131,15 @@ class Task_GUI(tk.Frame):
         yellow if Task Priority is 'medium',
         green if Task Priority is 'low'
         '''
-        if self.task.priority == 'high':
+        if self._task.priority == 'high':
             self.configure(bg='red')
             self._lbl_name.configure(bg='red')
             self._check_task_done.configure(bg='red')
-        elif self.task.priority == 'medium':
+        elif self._task.priority == 'medium':
             self.configure(bg='yellow')
             self._lbl_name.configure(bg='yellow')
             self._check_task_done.configure(bg='yellow')
-        elif self.task.priority == 'low':
+        elif self._task.priority == 'low':
             self.configure(bg='green')
             self._lbl_name.configure(bg='green')
             self._check_task_done.configure(bg='green')
@@ -152,12 +148,12 @@ class Task_GUI(tk.Frame):
         '''
         Deletes the Task and destroys the Task GUI
         '''
-        self.task.project.delete_task(self.task)
+        self._task.project.delete_task(self._task)
         self.destroy()
 
     def _do_task_gui(self):
         '''
         Set Task State to Done and desrtoys Task GUI
         '''
-        self.task.do_task()
+        self._task.do_task()
         self.destroy()

@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
     #Tests
 
-    new_projectmanager = ProjectManager()
+    new_projectmanager = ProjectManager('test')
     new_project = new_projectmanager._create_project()
     new_project.name = 'Hallo'
 
@@ -21,11 +21,11 @@ if __name__ == '__main__':
 
     del new_projectmanager
 
-    projectmanager_2 = ProjectManager()
+    projectmanager_2 = ProjectManager('test2')
 
     projectmanager_2._load_projects()
 
     print(projectmanager_2)
 
 
-    GUI()
+    GUI(projectmanager_2)
