@@ -1,4 +1,4 @@
-from gui import *
+from projectmanager_gui import *
 
 if __name__ == '__main__':
 
@@ -28,4 +28,4 @@ if __name__ == '__main__':
     #print(projectmanager_2)
 
 
-    GUI(projectmanager_2)
+    ProjectManager_GUI(projectmanager_2)

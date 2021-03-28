@@ -37,7 +37,7 @@ class Project_GUI(tk.Frame):
 
         self._lbl_pro_name = tk.Label(self._fr_pro_overview, text=self._project.name)
         self._bttn_pro_del_all_tasks = tk.Button(self._fr_pro_overview, text='delete all Tasks')
-        self._bttn_pro_add_task = tk.Button(self._fr_pro_overview, text='+ add new Task', width=49)
+        self._bttn_pro_add_task = tk.Button(self._fr_pro_overview, text='+ add new Task', width=40)
         self._check_pro_fr_hide = tk.Checkbutton(self._fr_pro_overview, text='hide Tasks', var=self._check_var)
 
         self._fr_pro_notes.grid(row=0, column=5, rowspan=10, sticky='n')

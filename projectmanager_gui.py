@@ -2,7 +2,7 @@ import tkinter as tk
 from project_manager import *
 from project_gui import *
 
-class GUI(tk.Frame):
+class ProjectManager_GUI(tk.Frame):
     def __init__(self, projectmanger, root=tk.Tk()):
         super().__init__(root)
 
