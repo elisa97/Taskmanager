@@ -141,9 +141,11 @@ class Project_GUI(tk.Frame):
         self._destroy_all_task_frames()
 
         for task in self._project._tasks:
-            self._temp_task_gui = Task_GUI(task, self._fr_pro_task_list, self)
-            self._temp_task_gui.grid()
-            self._lst_task_frames.append(self._temp_task_gui)
+            if task.state != State.done:
+                self._temp_task_gui = Task_GUI(task, self._fr_pro_task_list, self)
+                
+                self._temp_task_gui.grid()
+                self._lst_task_frames.append(self._temp_task_gui)
 
     def _delete_all_task_gui(self):
         '''
