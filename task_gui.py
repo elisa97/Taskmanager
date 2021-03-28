@@ -16,7 +16,6 @@ class Task_GUI(tk.Frame):
 
         #label
         self._lbl_task_name = tk.Label(self, text=self.task.name, width=20, anchor='w')
-        #self._lbl_task_priority = tk.Label(self, text=self.task.priority)
 
         self._lbl_task_notes = tk.Label(self.super_project_gui._fr_pro_task_notes, text=self.task.notes)
 
@@ -29,7 +28,6 @@ class Task_GUI(tk.Frame):
         #layout
         self._check_task_done.grid(row=0, column=0, sticky='w', padx=2)
         self._lbl_task_name.grid(row=0, column=1)
-        #self._lbl_task_priority.grid(row=0, column=3)
         self._check_task_show_notes.grid(row=0, column=4)
         self._bttn_task_edit.grid(row=0, column=5)
         self._bttn_task_delete.grid(row=0, column=6, sticky='e')

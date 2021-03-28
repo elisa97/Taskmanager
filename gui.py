@@ -19,8 +19,6 @@ class GUI(tk.Frame):
         self._fr_project_overview = tk.Frame(self)
         self._fr_projects = tk.Frame(self)
 
-        #self._can_projects = tk.Canvas(self._fr_project)
-
         #labels
         self._lbl_title = tk.Label(self._fr_project_overview, text='Project Overview')
 
@@ -141,6 +139,7 @@ class GUI(tk.Frame):
         self._create_elements()
 
 
-    def _destroy_project_gui(self):
-        self._fr_project_overview.destroy()
+    '''def _destroy_project_gui(self):
+        for old in self._fr_project_overview.winfo_children():
+            old.destroy()'''
 

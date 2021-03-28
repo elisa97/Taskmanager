@@ -13,14 +13,16 @@ class Project_GUI(tk.Frame):
         self._check_var.set(False)
 
         #frame
-        self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
-        self._fr_pro_overview = tk.Frame(self, height=20, width=20, bg=self.project.color)
-        self._fr_pro_notes = tk.Frame(self, height=20, width=20, bg=self.project.color, bd=2, relief='groove')
-        self._fr_pro_task_notes = tk.Frame(self._fr_pro_notes, height=20, width=20, bd=2, relief='groove')
         
-        self._update_tasks()
+        self._fr_pro_overview = tk.Frame(self, height=20, width=20, bg=self.project.color)
+        
+        self._update_tasks()        
 
     def _design_project_gui(self):
+
+        self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
+        self._fr_pro_notes = tk.Frame(self, height=20, width=20, bg=self.project.color, bd=2, relief='groove')
+        self._fr_pro_task_notes = tk.Frame(self._fr_pro_notes, height=20, width=20, bd=2, relief='groove')
 
         #label
         self._lbl_pro_name = tk.Label(self._fr_pro_overview, text=self.project.name)
@@ -117,9 +119,11 @@ class Project_GUI(tk.Frame):
         self._new_task.name = self._entry_task_name.get()
         self._new_task.notes = self._entry_task_notes.get('1.0', 'end-1c')
         self._new_task.priority = self._lb_priority.get('active')
-        self._new_task_gui = Task_GUI(self._new_task, self._fr_pro_tasks, self)
-        self._new_task_gui.grid()
-        self._lst_task_frames.append(self._new_task_gui)
+
+        #self._new_task_gui = Task_GUI(self._new_task, self._fr_pro_tasks, self)
+        #self._new_task_gui.grid()
+        #self._lst_task_frames.append(self._new_task_gui)
+        self._update_tasks()
         self.task_window.destroy()
 
     def _update_tasks(self):
