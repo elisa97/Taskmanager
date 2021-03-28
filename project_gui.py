@@ -146,23 +146,17 @@ class Project_GUI(tk.Frame):
 
     def _update_tasks(self):
         '''
-
+        Build the Project GUI elements
+        Build the new Task GUIs after deleteting all Task GUIs
         '''
         self._design_project_gui()
-        self._destroy_all_task_gui()
+        self._delete_all_task_gui()
 
         self._lst_task_frames = []
         for task in self.project._tasks:
             self._temp_task_gui = Task_GUI(task, self._fr_pro_tasks, self)
             self._temp_task_gui.grid()
             self._lst_task_frames.append(self._temp_task_gui)
-
-    def _destroy_all_task_gui(self):
-        '''
-        ????
-        '''
-        for old in self._fr_pro_tasks.winfo_children():
-            old.destroy()
 
     def _delete_all_task_gui(self):
         '''
