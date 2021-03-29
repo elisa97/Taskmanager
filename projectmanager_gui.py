@@ -39,6 +39,7 @@ class ProjectManager_GUI(tk.Frame):
         self._bttn_create_project['command'] = self._create_project_gui
         self._bttn_show_project['command'] = self._update_project
         self._bttn_edit_project['command'] = self._edit_project
+        self._bttn_delete_project['command'] = self._delete_project_gui
 
 
         self._update_listbox()
@@ -191,4 +192,9 @@ class ProjectManager_GUI(tk.Frame):
         for widget in self._fr_project.winfo_children():
             widget.destroy()
 
-
+    def _delete_project_gui(self):
+        self._find_active_project()
+        self._project_to_delete = self.found_project
+        self._projectmanager._delete_project(self._project_to_delete)
+        self._update_listbox()
+        self._update_project()
