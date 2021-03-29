@@ -58,7 +58,7 @@ class App_GUI(tk.Frame):
         self._bttn_delete_user['command'] = self._delete_user_gui
         self._bttn_edit_user['command'] = self._edit_user
 
-        self._update_listbox()
+        self._update_listbox_gui()
 
 
     def _create_new_user_gui(self):
@@ -87,7 +87,7 @@ class App_GUI(tk.Frame):
         self._new_user = self._app.create_projectmanager()
         self._new_user.name = self._entry_user_name.get()
 
-        self._update_listbox()
+        self._update_listbox_gui()
         self._new_user_window.destroy()
 
     def _edit_user(self):
@@ -122,20 +122,20 @@ class App_GUI(tk.Frame):
     def _save_edited_user(self):
         self._user_to_edit.name = self._entry_edit_user_name.get()
         self._delete_projectmanager_gui()
-        self._user_gui = ProjectManager_GUI(self, self.fr_projectmanager_gui, self._root)
+        self._user_gui = ProjectManager_GUI(self, self.fr_projectmanager_gui,self, self._root)
         self._user_gui.grid()
-        self._update_listbox()
+        self._update_listbox_gui()
         self._edit_user_window.destroy()
 
-    def _build_listboxes(self):
+    def _build_listboxes_gui(self):
         i = 0
         for user in self._app._projectmanagers:
             self._lb_users.insert(i, user.name)
             i +=1
 
-    def _update_listbox(self):
+    def _update_listbox_gui(self):
         self._lb_users.delete(0, tk.END)
-        self._build_listboxes()
+        self._build_listboxes_gui()
 
     def _find_active_user(self):
         self._selected_user_name = self._lb_users.get('active')
