@@ -3,7 +3,7 @@ from project_manager import *
 from project_gui import *
 
 class ProjectManager_GUI(tk.Frame):
-    def __init__(self, projectmanger, app, root):
+    def __init__(self, projectmanger, app_gui, root):
         super().__init__(root)
 
         self._root = root
@@ -35,17 +35,14 @@ class ProjectManager_GUI(tk.Frame):
         self._bttn_edit_project.grid(row=12, column=0)
         self._bttn_delete_project.grid(row=14, column=0)
 
-        #event handler
+        #eventhandler
         self._bttn_create_project['command'] = self._create_project_gui
         self._bttn_show_project['command'] = self._update_project
         self._bttn_edit_project['command'] = self._edit_project
         self._bttn_delete_project['command'] = self._delete_project_gui
 
-
         self._update_listbox()
-        #self._create_project_overview()
 
-        self._root.mainloop()
 
     def _create_project_gui(self):
 

@@ -1,4 +1,4 @@
-from projectmanager_gui import *
+from app_gui import *
 
 if __name__ == '__main__':
 
@@ -21,11 +21,11 @@ if __name__ == '__main__':
 
     del new_projectmanager'''
 
-    projectmanager_2 = ProjectManager('test2')
+    #projectmanager_2 = ProjectManager('test2')
 
     #projectmanager_2._load_projects()
 
     #print(projectmanager_2)
 
 
-    ProjectManager_GUI(projectmanager_2)
+    App_GUI()
