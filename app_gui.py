@@ -8,7 +8,7 @@ class App_GUI(tk.Frame):
         super().__init__(root)
 
         self._root = root
-        self._app = App
+        self._app = App()
 
         self._create_elements()
     
@@ -47,15 +47,16 @@ class App_GUI(tk.Frame):
 
         #layout
         self._lbl_user_name.grid(row=0, column=0)
-        self._bttn_add_user.grid(row=2, column=0)
-        self._lb_users.grid(row=3, column=0, rowspan=10, sticky='n')
+        self._bttn_add_user.grid(row=1, column=0)
+        self._lb_users.grid(row=2, column=0, rowspan=10, sticky='n')
         self._bttn_edit_user.grid(row=14, column=0)
         self._bttn_delete_user.grid(row=15, column=0)
+        self._bttn_select_user.grid(row=13, column=0)
 
         #eventhandler
         self._bttn_add_user['command'] = self._create_new_user_gui
         self._bttn_delete_user['command'] = self._delete_user_gui
-        self._bttn_edit_user['command'] = self._edit_user_gui
+        self._bttn_edit_user['command'] = self._edit_user
 
         self._update_listbox()
 
@@ -73,13 +74,14 @@ class App_GUI(tk.Frame):
 
         #layout
         self._lbl_dscrb_user_name.grid(row=0, column=0)
-        self._entry_user_name.grid(row=0, column=1)
+        self._entry_user_name.grid(row=0, column=1, columnspan=2)
         self._bttn_save_new_user.grid(row=2, column=1)
         self._bttn_cancel_new_user.grid(row=2, column=2)
 
         #eventhandler
         self._bttn_save_new_user['command'] = self._save_new_user
         self._bttn_cancel_new_user['command'] = self._new_user_window.destroy
+        self._bttn_select_user['command'] = self._update_projectmanager
 
     def _save_new_user(self):
         self._new_user = self._app.create_projectmanager()
@@ -92,7 +94,7 @@ class App_GUI(tk.Frame):
 
         self._find_active_user()
         self._user_to_edit = self._found_user
-        self._edit_user_window()
+        self._edit_user_gui()
 
     def _edit_user_gui(self):
         
@@ -102,20 +104,20 @@ class App_GUI(tk.Frame):
         #elements
         self._lbl_dscrb_edit_user_name = tk.Label(self._edit_user_window, text='User Name:')
         self._entry_edit_user_name = tk.Entry(self._edit_user_window)
-        self._entry_edit_user_name.insert(0, self._project_to_edit.name)
+        self._entry_edit_user_name.insert(0, self._user_to_edit.name)
         self._bttn_save_edit_user = tk.Button(self._edit_user_window, text='save', activebackground='green')
         self._bttn_cancel_edit_user = tk.Button(self._edit_user_window, text='delete', activebackground='red')
 
 
         #layout
-        self._lbl_dscrb_user_name.grid(row=0, column=0)
-        self._entry_user_name.grid(row=0, column=1)
-        self._bttn_save_new_user.grid(row=2, column=1)
-        self._bttn_cancel_new_user.grid(row=2, column=2)
+        self._lbl_dscrb_edit_user_name.grid(row=0, column=0)
+        self._entry_edit_user_name.grid(row=0, column=1)
+        self._bttn_save_edit_user.grid(row=2, column=1)
+        self._bttn_cancel_edit_user.grid(row=2, column=2)
 
         #eventhandler
-        self._bttn_save_new_user['command'] = self._edit_user
-        self._bttn_cancel_new_user['command'] = self._edit_user_window.destroy
+        self._bttn_save_edit_user['command'] = self._save_edited_user
+        self._bttn_cancel_edit_user['command'] = self._edit_user_window.destroy
 
     def _save_edited_user(self):
         self._user_to_edit.name = self._entry_edit_user_name.get()
@@ -133,7 +135,7 @@ class App_GUI(tk.Frame):
 
     def _update_listbox(self):
         self._lb_users.delete(0, tk.END)
-        self.build_listboxes()
+        self._build_listboxes()
 
     def _find_active_user(self):
         self._selected_user_name = self._lb_users.get('active')
