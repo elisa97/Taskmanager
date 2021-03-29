@@ -9,7 +9,6 @@ class ProjectManager_GUI(tk.Frame):
         self._root = root
         self._projectmanager = projectmanger
 
-        self.pack()
         self.build_projectmanager_gui()
 
     def build_projectmanager_gui(self):

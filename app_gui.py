@@ -9,7 +9,7 @@ class App_GUI(tk.Frame):
 
         self._root = root
         self._app = App()
-
+        self._app.load_app()
         self._create_elements()
     
     def _create_elements(self):
@@ -57,6 +57,7 @@ class App_GUI(tk.Frame):
         self._bttn_add_user['command'] = self._create_new_user_gui
         self._bttn_delete_user['command'] = self._delete_user_gui
         self._bttn_edit_user['command'] = self._edit_user
+        self._bttn_select_user['command'] = self._select_projectmanager
 
         self._update_listbox_gui()
 
@@ -81,7 +82,6 @@ class App_GUI(tk.Frame):
         #eventhandler
         self._bttn_save_new_user['command'] = self._save_new_user
         self._bttn_cancel_new_user['command'] = self._new_user_window.destroy
-        self._bttn_select_user['command'] = self._update_projectmanager
 
     def _save_new_user(self):
         self._new_user = self._app.create_projectmanager()
@@ -121,9 +121,9 @@ class App_GUI(tk.Frame):
 
     def _save_edited_user(self):
         self._user_to_edit.name = self._entry_edit_user_name.get()
-        self._delete_projectmanager_gui()
-        self._user_gui = ProjectManager_GUI(self, self.fr_projectmanager_gui,self, self._root)
-        self._user_gui.grid()
+        #self._delete_projectmanager_gui()
+        #self._user_gui = ProjectManager_GUI(self, self.fr_projectmanager_gui,self, self._root)
+        #self._user_gui.grid()
         self._update_listbox_gui()
         self._edit_user_window.destroy()
 
@@ -145,12 +145,13 @@ class App_GUI(tk.Frame):
                 self._found_user = user
                 break
 
-    def _update_projectmanager(self):
+    def _select_projectmanager(self):
         self._delete_projectmanager_gui()
         self._find_active_user()
         self._new_projectmanager_gui = ProjectManager_GUI(self._found_user, self.fr_projectmanager_gui, self._root)
         self._new_projectmanager_gui.grid()
-        self._update_listbox()
+        self._update_listbox_gui()
+        self._user_window.destroy()
         
     def _delete_projectmanager_gui(self):
         for widget in self.fr_projectmanager_gui.winfo_children():
@@ -160,5 +161,4 @@ class App_GUI(tk.Frame):
         self._find_active_user()
         self._user_to_delete = self._found_user
         self._app.delete_projectmanager(self._user_to_delete)
-        self._update_listbox()
-        self._update_projectmanager()
+        self._update_listbox_gui()
