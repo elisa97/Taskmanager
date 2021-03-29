@@ -30,23 +30,6 @@ class ProjectManager():
         if project in self._projects:
             self._projects.remove(project)
 
-    def _save_projects(self):
-        '''
-        Saves list of Projects to a file
-        Returns a pickle file
-        '''
-        outfile = open('saved_projects', 'wb')
-        pickle.dump(self._projects, outfile)
-        outfile.close()
-
-    def _load_projects(self):
-        '''
-        Loads list of Projects to a file
-        Returns a list of Projects
-        '''
-        infile = open('saved_projects','rb')
-        self._projects = pickle.load(infile)
-        infile.close()
     
     def __str__(self):
         '''
