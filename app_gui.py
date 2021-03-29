@@ -25,6 +25,15 @@ class App_GUI(tk.Frame):
         self._menu.add_cascade(label='File', menu=self._file_menu)
         self._file_menu.add_command(label='save file', command=self._save_file)
         #self._file_menu.add_command(label='load file', command=self._open_file)
-        self._user_menu = tk.Menu(self._file_menu)
-        self._file_menu.add_command(label='User menu')
+        self._user_menu = tk.Menu(self._menu)
+        self._user_menu.add_cascade(label='User menu', menu=self._menu)
+        self._user_menu.add_command(label='add new User')
 
+    def _create_new_projectmanager_gui(self):
+        
+        self.projectmanager_window = tk.Toplevel(self._root)
+        self.projectmanager_window.title('Create a new User')
+
+        #elements
+        self._lbl_dscrb_user_name = tk.Label(self.projectmanager_window, text='User Name:')
+        self._entry_user_name = tk.Entry(self.projectmanager_window)
