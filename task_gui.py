@@ -126,7 +126,8 @@ class Task_GUI(tk.Frame):
     def _get_task_color(self):
         '''
         Set the background color of 
-        Task Gui, Label Task Name, Checkbutton Task Done
+        Task Gui, Label Task Name, 
+        Checkbutton Task Done, Checkbutton Task Show Notes
         to red if Task Priority is 'high',
         yellow if Task Priority is 'medium',
         green if Task Priority is 'low'
@@ -135,14 +136,18 @@ class Task_GUI(tk.Frame):
             self.configure(bg='red')
             self._lbl_name.configure(bg='red')
             self._check_task_done.configure(bg='red')
+            self._check_task_show_notes.configure(bg='red')
         elif self._task.priority == 'medium':
             self.configure(bg='yellow')
             self._lbl_name.configure(bg='yellow')
             self._check_task_done.configure(bg='yellow')
+            self._check_task_show_notes.configure(bg='yellow')
         elif self._task.priority == 'low':
             self.configure(bg='green')
             self._lbl_name.configure(bg='green')
             self._check_task_done.configure(bg='green')
+            self._check_task_show_notes.configure(bg='green')
+
     
     def delete_task_gui(self):
         '''
@@ -153,7 +158,7 @@ class Task_GUI(tk.Frame):
 
     def _do_task_gui(self):
         '''
-        Set Task State to Done and desrtoys Task GUI
+        Set Task State to 'done' and destroys Task GUI
         '''
         self._task.do_task()
         self.destroy()

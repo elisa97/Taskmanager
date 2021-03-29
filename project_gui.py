@@ -29,7 +29,7 @@ class Project_GUI(tk.Frame):
         self._fr_pro_overview = tk.Frame(self, height=20, width=20, bg=self._project.color.value)
         self._fr_pro_tasks = tk.Frame(self, height=20, width=20)
 
-        self._fr_pro_overview.grid(row=0, column=0, columnspan=3, rowspan=8)
+        self._fr_pro_overview.grid(row=0, column=0, columnspan=3, rowspan=8, sticky='w')
         self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
 
         #_fr_pro_overview
@@ -37,10 +37,10 @@ class Project_GUI(tk.Frame):
 
         self._lbl_pro_name = tk.Label(self._fr_pro_overview, text=self._project.name)
         self._bttn_pro_del_all_tasks = tk.Button(self._fr_pro_overview, text='delete all Tasks')
-        self._bttn_pro_add_task = tk.Button(self._fr_pro_overview, text='+ add new Task', width=40)
+        self._bttn_pro_add_task = tk.Button(self._fr_pro_overview, text='+ add new Task', width=45)
         self._check_pro_fr_hide = tk.Checkbutton(self._fr_pro_overview, text='hide Tasks', var=self._check_var)
 
-        self._fr_pro_notes.grid(row=0, column=5, rowspan=10, sticky='n')
+        self._fr_pro_notes.grid(row=0, column=5, rowspan=10)
         self._lbl_pro_name.grid(row=0, column=0, rowspan=2)
         self._check_pro_fr_hide.grid(row=4, column=0)
         self._bttn_pro_del_all_tasks.grid(row=5, column=0)
@@ -53,7 +53,7 @@ class Project_GUI(tk.Frame):
 
         #_fr_pro_notes
         self._lbl_dscrb_pro_notes = tk.Label(self._fr_pro_notes, text='Notes: ')
-        self._lbl_pro_notes = tk.Label(self._fr_pro_notes, text=self._project.notes, height=5, anchor='nw')
+        self._lbl_pro_notes = tk.Label(self._fr_pro_notes, text=self._project.notes, height=5, width=10, anchor='nw')
 
         self._lbl_dscrb_pro_notes.grid(row=0, column=0)
         self._lbl_pro_notes.grid(row=1, column=0, rowspan=5, pady=5)
@@ -62,8 +62,8 @@ class Project_GUI(tk.Frame):
         self._fr_pro_task_notes = tk.Frame(self._fr_pro_tasks, height=20, width=20, bd=2, relief='groove')
         self._fr_pro_task_list = tk.Frame(self._fr_pro_tasks, height=20, width=20)
 
-        self._fr_pro_task_notes.grid(row=0, column=10)
-        self._fr_pro_task_list.grid(row=0, column=0)
+        self._fr_pro_task_notes.grid(row=0, column=10, sticky='n')
+        self._fr_pro_task_list.grid(row=0, column=0, sticky='n')
 
         #_fr_pro_task_notes
         self._lbl_dscrb_task_notes = tk.Label(self._fr_pro_task_notes, text='Task Notes: ')
