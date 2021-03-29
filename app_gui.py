@@ -47,10 +47,10 @@ class App_GUI(tk.Frame):
 
         #layout
         self._lbl_user_name.grid(row=0, column=0)
-        self._bttn_add_user(row=2, column=0)
+        self._bttn_add_user.grid(row=2, column=0)
         self._lb_users.grid(row=3, column=0, rowspan=10, sticky='n')
-        self._bttn_edit_user(row=14, column=0)
-        self._bttn_delete_user(row=15, column=0)
+        self._bttn_edit_user.grid(row=14, column=0)
+        self._bttn_delete_user.grid(row=15, column=0)
 
         #eventhandler
         self._bttn_add_user['command'] = self._create_new_user_gui
@@ -153,3 +153,10 @@ class App_GUI(tk.Frame):
     def _delete_projectmanager_gui(self):
         for widget in self.fr_projectmanager_gui.winfo_children():
             widget.destroy()
+        
+    def _delete_user_gui(self):
+        self._find_active_user()
+        self._user_to_delete = self._found_user
+        self._app.delete_projectmanager(self._user_to_delete)
+        self._update_listbox()
+        self._update_projectmanager()
