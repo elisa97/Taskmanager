@@ -162,7 +162,7 @@ class App_GUI(tk.Frame):
     def _build_listboxes_gui(self):
         self._lb_users.delete(0, tk.END)
         i = 0
-        for user in self._app._projectmanagers:
+        for user in self._app.projectmanagers:
             self._lb_users.insert(i, user.name)
             i +=1
 
@@ -171,7 +171,7 @@ class App_GUI(tk.Frame):
         '''
         self._selected_user_name = self._lb_users.get('active')
         self._found_user = None
-        for user in self._app._projectmanagers:
+        for user in self._app.projectmanagers:
             if user.name == self._selected_user_name:
                 self._found_user = user
                 break
