@@ -176,27 +176,35 @@ class Project_GUI(tk.Frame):
         '''
         if self._check_var_frame.get():
             self._fr_pro_tasks.grid_forget()
+            self._fr_pro_notes.grid_forget()
+            self._check_show_done_tasks['state'] = 'disabled'
         else:
             self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
+            self._fr_pro_notes.grid(row=0, column=5, rowspan=10)
+            self._check_show_done_tasks['state'] = 'normal'
+
 
     def _disable_bttns(self):
         '''
         '''
         if self._project.is_empty():
             self._bttn_pro_del_all_tasks['state'] = 'disabled'
+            self._check_show_done_tasks['state'] = 'disabled'
+            self._check_pro_fr_hide['state'] = 'disabled'
 
         else:
             self._bttn_pro_del_all_tasks['state'] = 'normal'
+            self._check_show_done_tasks['state'] = 'normal'
+            self._check_pro_fr_hide['state'] = 'normal'
+
+            
 
     
     def _show_done_tasks(self):
         
         if self._check_var_task.get():
-            print(self._check_var_task.get())
             for task in self._lst_task_frames:
-                print('test 1')
                 task.show_done()
         else:
-            print(self._check_var_task.get())
             for task in self._lst_task_frames:
                 task.show_unprocessed()
