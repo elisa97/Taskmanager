@@ -146,7 +146,8 @@ class Task_GUI(tk.Frame):
 
     def _save_task(self):
         """
-        Writes the entry information from the Edit Task Window in the Task
+        Writes the entry information from the Edit Task Window 
+        into the Task
 
         Returns the edited Task
         """

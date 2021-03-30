@@ -149,7 +149,7 @@ class Project_GUI(tk.Frame):
         an Entry for the Task name,
         an Entry for the Task notes,
         an Listbox for the Task priority,
-        a button to save the new Task,
+        a Button to save the new Task,
         a Button to cancel creating the Task
 
         Returns a new Task (if saved)
