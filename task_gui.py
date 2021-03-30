@@ -165,7 +165,8 @@ class Task_GUI(tk.Frame):
     def show_done(self):
         '''
         '''
-        if self._task.state == 'done':
+        print(self._task.state)
+        if self._task.state == 1:
             self.grid()
             print('show done')
         else:
@@ -174,7 +175,8 @@ class Task_GUI(tk.Frame):
     def show_unprocessed(self):
         '''
         '''
-        if self._task.state == 'unprocessed':
+        print(self._task.state.value)
+        if self._task.state.value == 0:
             self.grid()
             print('show unprocessed')
         else:

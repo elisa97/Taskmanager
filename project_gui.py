@@ -149,12 +149,13 @@ class Project_GUI(tk.Frame):
         self._destroy_all_task_frames()
 
         for task in self._project._tasks:
-            if task.state != State.done:
-                self._temp_task_gui = Task_GUI(task, self._fr_pro_task_list, self)
+            self._temp_task_gui = Task_GUI(task, self._fr_pro_task_list, self)
                 
-                self._temp_task_gui.grid()
-                self._lst_task_frames.append(self._temp_task_gui)
+            self._temp_task_gui.grid()
+            self._lst_task_frames.append(self._temp_task_gui)
         self._disable_bttns()
+        self._show_done_tasks()
+
 
     def _delete_all_task_gui(self):
         '''
@@ -163,6 +164,7 @@ class Project_GUI(tk.Frame):
         for task in self._lst_task_frames:
             task.delete_task_gui()
         self._disable_bttns()
+
     
     def _destroy_all_task_frames(self):
         for task in self._fr_pro_task_list.winfo_children():
@@ -188,9 +190,13 @@ class Project_GUI(tk.Frame):
 
     
     def _show_done_tasks(self):
+        
         if self._check_var_task.get():
+            print(self._check_var_task.get())
             for task in self._lst_task_frames:
+                print('test 1')
                 task.show_done()
         else:
+            print(self._check_var_task.get())
             for task in self._lst_task_frames:
                 task.show_unprocessed()
