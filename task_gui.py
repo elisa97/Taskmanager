@@ -33,7 +33,7 @@ class Task_GUI(tk.Frame):
         self._check_task_done = tk.Checkbutton(self, variable=self._check_var_task)
         self._bttn_task_delete = tk.Button(self, text='delete', activebackground='red')
         self._bttn_task_edit = tk.Button(self, text='edit')
-        self._check_task_show_notes = tk.Checkbutton(self, variable=self._task.id, text='show notes', var=self._check_var)
+        self._check_task_show_notes = tk.Checkbutton(self, variable=self._task._id, text='show notes', var=self._check_var)
         
         #layout
         self._check_task_done.grid(row=0, column=0, sticky='w', padx=2)
