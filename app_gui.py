@@ -10,8 +10,10 @@ class App_GUI(tk.Frame):
         self._root = root
         self._app = App()
 
-
-        self._app.load_app()
+        try:
+            self._app.load_app()
+        except FileNotFoundError:
+            pass
 
         self._create_elements()
     
