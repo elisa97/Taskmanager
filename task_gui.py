@@ -4,8 +4,9 @@ from task import *
 
 class Task_GUI(tk.Frame):
     """
-    Task GUI Object contains:
-    task, super_project_gui, 
+    Task_GUI Object contains:
+    task, 
+    super_project_gui, 
     master, 
     check_var_notes (for showing Task Notes), 
     check_var_done (for marking Task as done)
@@ -87,7 +88,15 @@ class Task_GUI(tk.Frame):
         """
         Generates a window where Task can be edited and saved
 
-        Returns the edited or original Task
+        contains
+        an Entry for the Task name,
+        an Entry for the Task notes,
+        an Listbox for the Task priority,
+        a button to save the edited Task,
+        a Button to cancel editing the Task
+
+        Returns the edited Task (if saved)
+        Returns the original Task (if canceled)
         """
 
         # window

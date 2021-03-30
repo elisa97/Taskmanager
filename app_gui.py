@@ -111,6 +111,9 @@ class App_GUI(tk.Frame):
         self._bttn_save_new_user['command'] = self._save_new_user
         self._bttn_cancel_new_user['command'] = self._new_user_window.destroy
 
+        #configuration
+        self._entry_user_name.insert(0, 'Default User')
+
     def _save_new_user(self):
         '''
         

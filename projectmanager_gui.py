@@ -92,6 +92,9 @@ class ProjectManager_GUI(tk.Frame):
         self._bttn_save_project['command'] = self.save_new_project
         self._bttn_cancel_project['command'] = self.project_window.destroy
 
+        #configuration
+        self._entry_project_name.insert(0, 'Default Project')
+
     def save_new_project(self):
         '''
         '''

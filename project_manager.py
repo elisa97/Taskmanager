@@ -5,7 +5,8 @@ import pickle
 class ProjectManager:
     """
     ProjectManager Object contains:
-    name, list of projects
+    name, 
+    list of projects
 
     can be constructed with 'ProjectManager(name: str)'
     """
