@@ -12,6 +12,8 @@ class ProjectManager_GUI(tk.Frame):
         self.build_projectmanager_gui()
 
     def build_projectmanager_gui(self):
+        '''
+        '''
 
         #frames
         self._fr_project = tk.Frame(self)
@@ -37,11 +39,11 @@ class ProjectManager_GUI(tk.Frame):
         #eventhandler
         self._bttn_create_project['command'] = self._create_project_gui
         self._bttn_show_project['command'] = self._update_project
-        self._bttn_edit_project['command'] = self._edit_project
+        self._bttn_edit_project['command'] = self._edit_project_gui
         self._bttn_delete_project['command'] = self._delete_project_gui
 
         self._disable_bttns()
-        self._update_listbox()
+        self._build_listboxes_pro()
 
 
     def _create_project_gui(self):
@@ -95,18 +97,15 @@ class ProjectManager_GUI(tk.Frame):
         self._new_project.name = self._entry_project_name.get()
         self._new_project.notes = self._entry_project_notes.get('1.0', 'end-1c')
         self._new_project.color = find_color(self._lb_color_project.get('active'))
-        self._update_listbox()
+        self._build_listboxes_pro()
         self._disable_bttns()
         self.project_window.destroy()
 
-    def _edit_project(self):
+
+    def _edit_project_gui(self):
 
         self._find_active_project()
         self._project_to_edit = self.found_project
-        self._edit_project_window()
-
-
-    def _edit_project_window(self):
 
         self._edit_window = tk.Toplevel(self._root)
         self._edit_window.title('Edit Project')
@@ -156,21 +155,15 @@ class ProjectManager_GUI(tk.Frame):
         self._project_to_edit.notes = self._entry_edit_notes.get('1.0', 'end-1c')
         self._project_to_edit.color = find_color(self._lb_color_edit.get('active'))
         self._delete_project_overview()
-        self._new_project_gui = Project_GUI(self._project_to_edit, self._fr_project, self)
-        self._new_project_gui.grid()
-        self._update_listbox()
+        self._build_listboxes_pro()
         self._edit_window.destroy()
 
-    def build_listboxes(self):
+    def _build_listboxes_pro(self):
+        self._lb_projects.delete(0, tk.END)
         i = 0
         for pro in self._projectmanager._projects:
             self._lb_projects.insert(i, pro.name)
             i +=1
-
-    def _update_listbox(self):
-        self._lb_projects.delete(0, tk.END)
-        self.build_listboxes()
-
 
     def _update_project(self):
         '''
@@ -184,7 +177,7 @@ class ProjectManager_GUI(tk.Frame):
         except AttributeError:
             pass
         
-        self._update_listbox()
+        self._build_listboxes_pro()
         self._disable_bttns()
     
     def _find_active_project(self):
@@ -203,7 +196,7 @@ class ProjectManager_GUI(tk.Frame):
         self._find_active_project()
         self._project_to_delete = self.found_project
         self._projectmanager._delete_project(self._project_to_delete)
-        self._update_listbox()
+        self._build_listboxes_pro()
         self._disable_bttns()
         self._update_project()
 

@@ -6,6 +6,12 @@ class App():
     def __init__(self):
         self._projectmanagers = []
 
+    def is_empty(self):
+        '''
+        Returns true, if list of Projectmanagers is empty
+        '''
+        return len(self._projectmanagers) == 0
+
 
     def create_projectmanager(self):
         '''

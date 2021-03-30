@@ -73,9 +73,10 @@ class App_GUI(tk.Frame):
         #eventhandler
         self._bttn_add_user['command'] = self._create_new_user_gui
         self._bttn_delete_user['command'] = self._delete_user_gui
-        self._bttn_edit_user['command'] = self._edit_user
+        self._bttn_edit_user['command'] = self._edit_user_gui
         self._bttn_select_user['command'] = self._select_projectmanager
 
+        self._disable_bttns()
         self._build_listboxes_gui()
 
 
@@ -113,18 +114,17 @@ class App_GUI(tk.Frame):
         self._new_user.name = self._entry_user_name.get()
 
         self._build_listboxes_gui()
+        self._disable_bttns()
         self._new_user_window.destroy()
 
-    def _edit_user(self):
-        '''
-        '''
-        self._find_active_user()
-        self._user_to_edit = self._found_user
-        self._edit_user_gui()
 
     def _edit_user_gui(self):
         '''
         '''
+
+        self._find_active_user()
+        self._user_to_edit = self._found_user
+
         self._edit_user_window = tk.Toplevel(self._root)
         self._edit_user_window.title('Edit User')
 
@@ -151,6 +151,7 @@ class App_GUI(tk.Frame):
         '''
         self._user_to_edit.name = self._entry_edit_user_name.get()
         self._build_listboxes_gui()
+        self._disable_bttns()
         self._edit_user_window.destroy()
 
     def _build_listboxes_gui(self):
@@ -188,4 +189,17 @@ class App_GUI(tk.Frame):
         self._find_active_user()
         self._user_to_delete = self._found_user
         self._app.delete_projectmanager(self._user_to_delete)
+        self._disable_bttns()
         self._build_listboxes_gui()
+    
+    def _disable_bttns(self):
+        '''
+        '''
+        if self._app.is_empty():
+            self._bttn_delete_user['state'] = 'disabled'
+            self._bttn_edit_user['state'] = 'disabled'
+            self._bttn_select_user['state'] = 'disabled'
+        else:
+            self._bttn_edit_user['state'] = 'normal'
+            self._bttn_delete_user['state'] = 'normal'
+            self._bttn_select_user['state'] = 'normal'
