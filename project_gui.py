@@ -170,6 +170,8 @@ class Project_GUI(tk.Frame):
 
 
     def _hide_task(self):
+        '''
+        '''
         if self._check_var_frame.get():
             self._fr_pro_tasks.grid_forget()
         else:
@@ -190,4 +192,5 @@ class Project_GUI(tk.Frame):
             for task in self._lst_task_frames:
                 task.show_done()
         else:
-            self.update_tasks()
+            for task in self._lst_task_frames:
+                task.show_unprocessed()
