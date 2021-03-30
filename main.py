@@ -26,7 +26,7 @@ if __name__ == '__main__':
     #projectmanager_2._load_projects()
 
     #print(projectmanager_2)
-
+    '''
     app = App()
 
     user = app.create_projectmanager()
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     print(new_app)
 
     new_app.save_app()
-    print(new_app)
+    print(new_app)'''
 
 
     App_GUI()

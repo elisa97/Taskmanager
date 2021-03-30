@@ -40,6 +40,11 @@ class Task():
         '''
         self.state = State.done
 
+    def undo_task(self):
+        '''
+        set Task State to 'done' 
+        '''
+        self.state = State.unprocessed
 
     def __str__(self):
         '''

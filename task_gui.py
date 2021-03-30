@@ -28,7 +28,9 @@ class Task_GUI(tk.Frame):
         self._lbl_task_notes = tk.Label(self._super_project_gui._fr_pro_task_notes, text=self._task.notes)
 
         #button
-        self._check_task_done = tk.Checkbutton(self, variable=self._task.id)
+        self._check_var_task = tk.BooleanVar()
+        self._check_var_task.set(False)
+        self._check_task_done = tk.Checkbutton(self, variable=self._check_var_task)
         self._bttn_task_delete = tk.Button(self, text='delete', activebackground='red')
         self._bttn_task_edit = tk.Button(self, text='edit')
         self._check_task_show_notes = tk.Checkbutton(self, variable=self._task.id, text='show notes', var=self._check_var)
@@ -159,8 +161,13 @@ class Task_GUI(tk.Frame):
         '''
         Set Task State to 'done' and destroys Task GUI
         '''
-        self._task.do_task()
-        self.grid_forget()
+        if self._check_var_task.get():
+            self._task.do_task()
+            self.grid_forget()      
+        else:
+            self._task.undo_task()
+            self.grid()
+            self.show_done()
 
     def show_done(self):
         '''
