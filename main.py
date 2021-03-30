@@ -27,5 +27,22 @@ if __name__ == '__main__':
 
     #print(projectmanager_2)
 
+    app = App()
+
+    user = app.create_projectmanager()
+    user.name = 'heinz'
+    print(app)
+    app.save_app()
+    app.delete_projectmanager(user)
+    app.save_app()
+    del app
+
+    new_app = App()
+    new_app.load_app()
+    print(new_app)
+
+    new_app.save_app()
+    print(new_app)
+
 
     App_GUI()

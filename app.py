@@ -56,6 +56,5 @@ class App():
         for projectmanager in self._projectmanagers:
             printed_projectmanagers += str(projectmanager)
             printed_projectmanagers += '\n'
-        return str( 'Name: ' + self.name + \
-                    ' Projects: \n' + printed_projectmanagers)
+        return str(' Projects: \n' + printed_projectmanagers)
 
