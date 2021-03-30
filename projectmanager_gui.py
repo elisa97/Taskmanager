@@ -93,6 +93,8 @@ class ProjectManager_GUI(tk.Frame):
         self._bttn_cancel_project['command'] = self.project_window.destroy
 
     def save_new_project(self):
+        '''
+        '''
         self._new_project = self._projectmanager._create_project()
         self._new_project.name = self._entry_project_name.get()
         self._new_project.notes = self._entry_project_notes.get('1.0', 'end-1c')
@@ -103,7 +105,8 @@ class ProjectManager_GUI(tk.Frame):
 
 
     def _edit_project_gui(self):
-
+        '''
+        '''
         self._find_active_project()
         self._project_to_edit = self.found_project
 
@@ -151,6 +154,8 @@ class ProjectManager_GUI(tk.Frame):
         self._bttn_cancel_edit['command'] = self._edit_window.destroy
 
     def save_edited_project(self):
+        '''
+        '''
         self._project_to_edit.name = self._entry_edit_name.get()
         self._project_to_edit.notes = self._entry_edit_notes.get('1.0', 'end-1c')
         self._project_to_edit.color = find_color(self._lb_color_edit.get('active'))
@@ -159,6 +164,8 @@ class ProjectManager_GUI(tk.Frame):
         self._edit_window.destroy()
 
     def _build_listboxes_pro(self):
+        '''
+        '''
         self._lb_projects.delete(0, tk.END)
         i = 0
         for pro in self._projectmanager._projects:
@@ -181,6 +188,8 @@ class ProjectManager_GUI(tk.Frame):
         self._disable_bttns()
     
     def _find_active_project(self):
+        '''
+        '''
         self._selected_pro_name = self._lb_projects.get('active')
         self.found_project = None
         for project in self._projectmanager._projects:
@@ -189,10 +198,14 @@ class ProjectManager_GUI(tk.Frame):
                 break
 
     def _delete_project_overview(self):
+        '''
+        '''
         for widget in self._fr_project.winfo_children():
             widget.destroy()
 
     def _delete_project_gui(self):
+        '''
+        '''
         self._find_active_project()
         self._project_to_delete = self.found_project
         self._projectmanager._delete_project(self._project_to_delete)
@@ -202,6 +215,8 @@ class ProjectManager_GUI(tk.Frame):
 
 
     def _disable_bttns(self):
+        '''
+        '''
         if self._projectmanager.is_empty():
             self._bttn_edit_project['state'] = 'disabled'
             self._bttn_delete_project['state'] = 'disabled'

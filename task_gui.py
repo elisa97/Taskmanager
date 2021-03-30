@@ -160,5 +160,12 @@ class Task_GUI(tk.Frame):
         Set Task State to 'done' and destroys Task GUI
         '''
         self._task.do_task()
-        self.destroy()
+        self.grid_forget()
 
+    def show_done(self):
+        '''
+        '''
+        if self._task.state == 'done':
+            self.grid()
+        else:
+            self.grid_forget()

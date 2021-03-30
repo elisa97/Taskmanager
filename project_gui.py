@@ -16,11 +16,15 @@ class Project_GUI(tk.Frame):
         self._master = root
         self._super_projectmanager_gui = super_projectmanager_gui
 
-        self._check_var = tk.BooleanVar()
-        self._check_var.set(False)
+        self._check_var_frame = tk.BooleanVar()
+        self._check_var_frame.set(False)
+
+        self._check_var_task = tk.BooleanVar()
+        self._check_var_task.set(False)
         
         self.build_project_gui()
-        self.update_tasks()        
+        self.update_tasks()
+        self._disable_bttns()      
 
     def build_project_gui(self):
         '''
@@ -38,11 +42,13 @@ class Project_GUI(tk.Frame):
         self._lbl_pro_name = tk.Label(self._fr_pro_overview, text=self._project.name)
         self._bttn_pro_del_all_tasks = tk.Button(self._fr_pro_overview, text='delete all Tasks')
         self._bttn_pro_add_task = tk.Button(self._fr_pro_overview, text='+ add new Task', width=45)
-        self._check_pro_fr_hide = tk.Checkbutton(self._fr_pro_overview, text='hide Tasks', var=self._check_var)
+        self._check_pro_fr_hide = tk.Checkbutton(self._fr_pro_overview, text='hide Tasks', var=self._check_var_frame)
+        self._check_show_done_tasks = tk.Checkbutton(self._fr_pro_overview, text='show done Tasks', var=self._check_var_task)
 
         self._fr_pro_notes.grid(row=0, column=5, rowspan=10)
         self._lbl_pro_name.grid(row=0, column=0, rowspan=2)
         self._check_pro_fr_hide.grid(row=4, column=0)
+        self._check_show_done_tasks.grid(row=4, column=2)
         self._bttn_pro_del_all_tasks.grid(row=5, column=0)
         self._bttn_pro_add_task.grid(row=6, column=0,sticky='w', columnspan=3)
 
@@ -50,6 +56,7 @@ class Project_GUI(tk.Frame):
         self._bttn_pro_add_task['command'] = self._create_task_gui
         self._bttn_pro_del_all_tasks['command'] = self._delete_all_task_gui
         self._check_pro_fr_hide['command'] = self._hide_task
+        self._check_show_done_tasks['command'] = self._show_done_tasks
 
         #_fr_pro_notes
         self._lbl_dscrb_pro_notes = tk.Label(self._fr_pro_notes, text='Notes: ')
@@ -131,6 +138,7 @@ class Project_GUI(tk.Frame):
         self._new_task.notes = self._entry_task_notes.get('1.0', 'end-1c')
         self._new_task.priority = self._lb_priority.get('active')
         self.update_tasks()
+        self._disable_bttns()
         self.task_window.destroy()
 
     def update_tasks(self):
@@ -146,6 +154,7 @@ class Project_GUI(tk.Frame):
                 
                 self._temp_task_gui.grid()
                 self._lst_task_frames.append(self._temp_task_gui)
+        self._disable_bttns()
 
     def _delete_all_task_gui(self):
         '''
@@ -153,6 +162,7 @@ class Project_GUI(tk.Frame):
         '''
         for task in self._lst_task_frames:
             task.delete_task_gui()
+        self._disable_bttns()
     
     def _destroy_all_task_frames(self):
         for task in self._fr_pro_task_list.winfo_children():
@@ -160,7 +170,24 @@ class Project_GUI(tk.Frame):
 
 
     def _hide_task(self):
-        if self._check_var.get():
+        if self._check_var_frame.get():
             self._fr_pro_tasks.grid_forget()
         else:
             self._fr_pro_tasks.grid(row=8, column=0, columnspan=3, rowspan=10)
+
+    def _disable_bttns(self):
+        '''
+        '''
+        if self._project.is_empty():
+            self._bttn_pro_del_all_tasks['state'] = 'disabled'
+
+        else:
+            self._bttn_pro_del_all_tasks['state'] = 'normal'
+
+    
+    def _show_done_tasks(self):
+        if self._check_var_task.get():
+            for task in self._lst_task_frames:
+                task.show_done()
+        else:
+            self.update_tasks()
