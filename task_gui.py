@@ -4,9 +4,9 @@ from task import *
 class Task_GUI(tk.Frame):
     '''
     Task GUI Object contains:
-    task, super_project_gui, master, check_var
+    task, super_project_gui, master, check_var (for showing Task Notes)
 
-    can be constructed with 'Task_GUI(task, root, super_project_gui)'
+    can be constructed with 'Task_GUI(task: Task, root: tk, super_project_gui)'
     '''
     
     def __init__(self, task, root, super_project_gui):
@@ -15,6 +15,7 @@ class Task_GUI(tk.Frame):
         self._task = task
         self._super_project_gui = super_project_gui
         self._master = root
+        print(type(self._master))
         self._check_var = tk.BooleanVar()
         self._check_var.set(False)
 
