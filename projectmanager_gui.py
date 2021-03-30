@@ -22,9 +22,9 @@ class ProjectManager_GUI(tk.Frame):
 
         #elements projectmanager
         self._bttn_create_project = tk.Button(self._fr_projectmanager, text='create Project')
-        self._bttn_show_project = tk.Button(self._fr_projectmanager, text='show Project')
-        self._bttn_edit_project = tk.Button(self._fr_projectmanager, text='edit Project')
-        self._bttn_delete_project = tk.Button(self._fr_projectmanager, text='delete Project')
+        self._bttn_show_project = tk.Button(self._fr_projectmanager, text='show Project', state='normal', activebackground='green')
+        self._bttn_edit_project = tk.Button(self._fr_projectmanager, text='edit Project', state='normal')
+        self._bttn_delete_project = tk.Button(self._fr_projectmanager, text='delete Project', state='normal', activebackground='red')
         self._lb_projects = tk.Listbox(self._fr_projectmanager)
 
         #layout
@@ -40,11 +40,16 @@ class ProjectManager_GUI(tk.Frame):
         self._bttn_edit_project['command'] = self._edit_project
         self._bttn_delete_project['command'] = self._delete_project_gui
 
+        self._disable_bttns()
         self._update_listbox()
 
 
     def _create_project_gui(self):
-
+        '''
+        Generates a window where a new Project 
+        can be created and saved
+        Returns the new User or nothing
+        '''
         self.project_window = tk.Toplevel(self._root)
         self.project_window.title('Create a new Project')
 
@@ -91,6 +96,7 @@ class ProjectManager_GUI(tk.Frame):
         self._new_project.notes = self._entry_project_notes.get('1.0', 'end-1c')
         self._new_project.color = find_color(self._lb_color_project.get('active'))
         self._update_listbox()
+        self._disable_bttns()
         self.project_window.destroy()
 
     def _edit_project(self):
@@ -170,11 +176,16 @@ class ProjectManager_GUI(tk.Frame):
         '''
         Build the new Project GUI Overview
         '''
-        self._delete_project_overview()
-        self._find_active_project()
-        self._new_project_gui = Project_GUI(self.found_project, self._fr_project, self)
-        self._new_project_gui.grid()
+        try:
+            self._delete_project_overview()
+            self._find_active_project()
+            self._new_project_gui = Project_GUI(self.found_project, self._fr_project, self)
+            self._new_project_gui.grid()
+        except AttributeError:
+            pass
+        
         self._update_listbox()
+        self._disable_bttns()
     
     def _find_active_project(self):
         self._selected_pro_name = self._lb_projects.get('active')
@@ -193,4 +204,16 @@ class ProjectManager_GUI(tk.Frame):
         self._project_to_delete = self.found_project
         self._projectmanager._delete_project(self._project_to_delete)
         self._update_listbox()
+        self._disable_bttns()
         self._update_project()
+
+
+    def _disable_bttns(self):
+        if self._projectmanager.is_empty():
+            self._bttn_edit_project['state'] = 'disabled'
+            self._bttn_delete_project['state'] = 'disabled'
+            self._bttn_show_project['state'] = 'disabled'
+        else:
+            self._bttn_edit_project['state'] = 'normal'
+            self._bttn_delete_project['state'] = 'normal'
+            self._bttn_show_project['state'] = 'normal'

@@ -13,6 +13,12 @@ class ProjectManager():
         self.name = name
         self._projects = []
 
+    def is_empty(self):
+        '''
+        Returns true, if list of Projects is empty
+        '''
+        return len(self._projects) == 0
+
     def _create_project(self):
         '''
         Returns a new Project

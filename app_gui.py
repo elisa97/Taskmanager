@@ -13,6 +13,10 @@ class App_GUI(tk.Frame):
         self._create_elements()
     
     def _create_elements(self):
+        '''
+        Build the main window of the App with the menu
+        and the frame for the projectmanager_gui
+        '''
         
         #frames
         self.fr_projectmanager_gui = tk.Frame(self)
@@ -34,6 +38,19 @@ class App_GUI(tk.Frame):
 
 
     def _create_user_window(self):
+        '''
+        Generates a window with the User Overview
+        existing Users can be selected, edited or deleted
+        new Users can be created
+        '''
+        
+        #hide projectmanager if opened
+        try:
+            self._shown_projectmanager_gui.grid_forget()
+        except AttributeError:
+            pass
+
+        #window
         self._user_window = tk.Toplevel(self._root)
         self._user_window.title('User Overview')
 
@@ -59,11 +76,16 @@ class App_GUI(tk.Frame):
         self._bttn_edit_user['command'] = self._edit_user
         self._bttn_select_user['command'] = self._select_projectmanager
 
-        self._update_listbox_gui()
+        self._build_listboxes_gui()
 
 
     def _create_new_user_gui(self):
-        
+        '''
+        Generates a window where a new User 
+        can be created and saved
+
+        Returns the new User or nothing
+        '''
         self._new_user_window = tk.Toplevel(self._root)
         self._new_user_window.title('Create a new User')
 
@@ -71,7 +93,7 @@ class App_GUI(tk.Frame):
         self._lbl_dscrb_user_name = tk.Label(self._new_user_window, text='User Name:')
         self._entry_user_name = tk.Entry(self._new_user_window)
         self._bttn_save_new_user = tk.Button(self._new_user_window, text='save', activebackground='green')
-        self._bttn_cancel_new_user = tk.Button(self._new_user_window, text='delete', activebackground='red')
+        self._bttn_cancel_new_user = tk.Button(self._new_user_window, text='cancel', activebackground='red')
 
         #layout
         self._lbl_dscrb_user_name.grid(row=0, column=0)
@@ -84,20 +106,25 @@ class App_GUI(tk.Frame):
         self._bttn_cancel_new_user['command'] = self._new_user_window.destroy
 
     def _save_new_user(self):
+        '''
+        
+        '''
         self._new_user = self._app.create_projectmanager()
         self._new_user.name = self._entry_user_name.get()
 
-        self._update_listbox_gui()
+        self._build_listboxes_gui()
         self._new_user_window.destroy()
 
     def _edit_user(self):
-
+        '''
+        '''
         self._find_active_user()
         self._user_to_edit = self._found_user
         self._edit_user_gui()
 
     def _edit_user_gui(self):
-        
+        '''
+        '''
         self._edit_user_window = tk.Toplevel(self._root)
         self._edit_user_window.title('Edit User')
 
@@ -106,7 +133,7 @@ class App_GUI(tk.Frame):
         self._entry_edit_user_name = tk.Entry(self._edit_user_window)
         self._entry_edit_user_name.insert(0, self._user_to_edit.name)
         self._bttn_save_edit_user = tk.Button(self._edit_user_window, text='save', activebackground='green')
-        self._bttn_cancel_edit_user = tk.Button(self._edit_user_window, text='delete', activebackground='red')
+        self._bttn_cancel_edit_user = tk.Button(self._edit_user_window, text='cancel', activebackground='red')
 
 
         #layout
@@ -120,24 +147,22 @@ class App_GUI(tk.Frame):
         self._bttn_cancel_edit_user['command'] = self._edit_user_window.destroy
 
     def _save_edited_user(self):
+        '''
+        '''
         self._user_to_edit.name = self._entry_edit_user_name.get()
-        #self._delete_projectmanager_gui()
-        #self._user_gui = ProjectManager_GUI(self, self.fr_projectmanager_gui,self, self._root)
-        #self._user_gui.grid()
-        self._update_listbox_gui()
+        self._build_listboxes_gui()
         self._edit_user_window.destroy()
 
     def _build_listboxes_gui(self):
+        self._lb_users.delete(0, tk.END)
         i = 0
         for user in self._app._projectmanagers:
             self._lb_users.insert(i, user.name)
             i +=1
 
-    def _update_listbox_gui(self):
-        self._lb_users.delete(0, tk.END)
-        self._build_listboxes_gui()
-
     def _find_active_user(self):
+        '''
+        '''
         self._selected_user_name = self._lb_users.get('active')
         self._found_user = None
         for user in self._app._projectmanagers:
@@ -146,19 +171,21 @@ class App_GUI(tk.Frame):
                 break
 
     def _select_projectmanager(self):
-        self._delete_projectmanager_gui()
-        self._find_active_user()
-        self._new_projectmanager_gui = ProjectManager_GUI(self._found_user, self.fr_projectmanager_gui, self._root)
-        self._new_projectmanager_gui.grid()
-        self._update_listbox_gui()
-        self._user_window.destroy()
-        
-    def _delete_projectmanager_gui(self):
+        '''
+        '''   
         for widget in self.fr_projectmanager_gui.winfo_children():
             widget.destroy()
-        
+
+        self._find_active_user()
+        self._shown_projectmanager_gui = ProjectManager_GUI(self._found_user, self.fr_projectmanager_gui, self._root)
+        self._shown_projectmanager_gui.grid()
+        self._build_listboxes_gui()
+        self._user_window.destroy()
+
     def _delete_user_gui(self):
+        '''
+        '''
         self._find_active_user()
         self._user_to_delete = self._found_user
         self._app.delete_projectmanager(self._user_to_delete)
-        self._update_listbox_gui()
+        self._build_listboxes_gui()
