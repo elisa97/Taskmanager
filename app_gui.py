@@ -9,7 +9,7 @@ class App_GUI(tk.Frame):
 
         self._root = root
         self._app = App()
-        self._app.load_app()
+        #self._app.load_app()
         self._create_elements()
     
     def _create_elements(self):

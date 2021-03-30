@@ -89,7 +89,6 @@ class Task_GUI(tk.Frame):
         self._entry_task_name.insert(0, self._task.name)
         self._entry_task_notes.insert('1.0', self._task.notes)
 
-
         #layout
         self._lbl_dscrb_name.grid(row=0, column=0, rowspan=2)
         self._entry_task_name.grid(row=0, column=1, rowspan=2)

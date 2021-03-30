@@ -30,7 +30,7 @@ class App():
         Returns a pickle file
         '''
         outfile = open('saved_app', 'wb')
-        pickle.dump(self._projectmanager, outfile)
+        pickle.dump(self._projectmanagers, outfile)
         outfile.close()
 
     def load_app(self):
@@ -39,7 +39,7 @@ class App():
         Returns a list of Projectmanagers
         '''
         infile = open('saved_app','rb')
-        self._projectmanager = pickle.load(infile)
+        self._projectmanagers = pickle.load(infile)
         infile.close()
 
     def __str__(self):
