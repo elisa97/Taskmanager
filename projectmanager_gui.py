@@ -95,7 +95,7 @@ class ProjectManager_GUI(tk.Frame):
     def save_new_project(self):
         '''
         '''
-        self._new_project = self._projectmanager._create_project()
+        self._new_project = self._projectmanager.create_project()
         self._new_project.name = self._entry_project_name.get()
         self._new_project.notes = self._entry_project_notes.get('1.0', 'end-1c')
         self._new_project.color = find_color(self._lb_color_project.get('active'))
@@ -168,7 +168,7 @@ class ProjectManager_GUI(tk.Frame):
         '''
         self._lb_projects.delete(0, tk.END)
         i = 0
-        for pro in self._projectmanager._projects:
+        for pro in self._projectmanager.projects:
             self._lb_projects.insert(i, pro.name)
             i +=1
 
@@ -192,7 +192,7 @@ class ProjectManager_GUI(tk.Frame):
         '''
         self._selected_pro_name = self._lb_projects.get('active')
         self.found_project = None
-        for project in self._projectmanager._projects:
+        for project in self._projectmanager.projects:
             if project.name == self._selected_pro_name:
                 self.found_project = project
                 break
@@ -208,7 +208,7 @@ class ProjectManager_GUI(tk.Frame):
         '''
         self._find_active_project()
         self._project_to_delete = self.found_project
-        self._projectmanager._delete_project(self._project_to_delete)
+        self._projectmanager.delete_project(self._project_to_delete)
         self._build_listboxes_pro()
         self._disable_bttns()
         self._update_project()

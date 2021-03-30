@@ -148,7 +148,7 @@ class Project_GUI(tk.Frame):
         self._lst_task_frames = []
         self._destroy_all_task_frames()
 
-        for task in self._project._tasks:
+        for task in self._project.tasks:
             self._temp_task_gui = Task_GUI(task, self._fr_pro_task_list, self)
                 
             self._temp_task_gui.grid()

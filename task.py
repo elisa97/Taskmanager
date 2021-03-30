@@ -34,7 +34,7 @@ class Task:
         self, name, project, state=State.unprocessed, priority=Priority.none
     ):
         self.name = name
-        self._id = uuid.uuid4()
+        self.id = uuid.uuid4()
         self.project = project
         self.state = state
         self.priority = priority
