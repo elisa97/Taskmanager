@@ -138,7 +138,7 @@ class App_GUI(tk.Frame):
 
         #layout
         self._lbl_dscrb_edit_user_name.grid(row=0, column=0)
-        self._entry_edit_user_name.grid(row=0, column=1)
+        self._entry_edit_user_name.grid(row=0, column=1, columnspan=2)
         self._bttn_save_edit_user.grid(row=2, column=1)
         self._bttn_cancel_edit_user.grid(row=2, column=2)
 

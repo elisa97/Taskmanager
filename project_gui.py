@@ -39,7 +39,7 @@ class Project_GUI(tk.Frame):
         #_fr_pro_overview
         self._fr_pro_notes = tk.Frame(self._fr_pro_overview, height=20, width=20, bg=self._project.color.value, bd=2, relief='groove')
 
-        self._lbl_pro_name = tk.Label(self._fr_pro_overview, text=self._project.name, width=10, bg=self._project.color.value)
+        self._lbl_pro_name = tk.Label(self._fr_pro_overview, text=self._project.name, width=10, font='28', bg=self._project.color.value)
         self._bttn_pro_del_all_tasks = tk.Button(self._fr_pro_overview, text='delete all Tasks', activebackground='red')
         self._bttn_pro_add_task = tk.Button(self._fr_pro_overview, text='+ add new Task', width=45)
         self._check_pro_fr_hide = tk.Checkbutton(self._fr_pro_overview, text='hide Tasks', var=self._check_var_frame)
