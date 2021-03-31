@@ -98,11 +98,11 @@ E.g. if you haven't created any Users, the buttons *edit User*, *select User* an
 Now to the further usage and features of this programm:
 
 * ***Users*** 
-    Only 1 User can be selected at the same time.
+    Only 1 User can be selected at a time.
     Users can handle arbitrary Projects and a Project can include arbitrary Tasks. But they are connected to the User:  
     **Projects are User specific and can't be shared with other Users!**
     * create *Users*
-        like described in the [First Steps](###first-steps)
+        as described in the [First Steps](###first-steps)
     * edit *Users*
         a window will appear, where you can change the User name and save it
     * delete *Users*
@@ -112,7 +112,7 @@ Now to the further usage and features of this programm:
         is like a sign in with this User, it will show an overview of the Projects of the User
 
 * ***Projects***
-    Only 1 *Project Overview* of a Project can be shown at the same time.
+    Only 1 *Project Overview* of a Project can be shown at a time.
     Projects can organize arbitrary Tasks. But they are connected to the Project:
     **Tasks are Project specific and can't be shared with other Projects or other Users!**  
     * create *Project*
@@ -141,12 +141,12 @@ Now to the further usage and features of this programm:
 * ***Tasks***
     Tasks will appear in a list below the *Project Overview*
     Every Task:
-    * has a checkbutton on the left, which mark the Task as *done*, or *unprocessed* if un-checked again
+    * has a checkbutton on the left, which marks the Task as *done*, or *unprocessed* if un-checked again
     * the name of the task
     * a checkbutton to show the notes of the Task
         **Please just check this button on 1 Task at the same time!**
     * a button *edit*, which makes appear a new window, where the Task name, notes and priority can be edited and saved
-    * a button *delete*, which deletes the Task unrecoverable
+    * a button *delete*, which unrecoverably deletes the Task 
     * a color, if the *priority* isn't *none*:
         * red, if the priority is high
         * yellow, if the priority is medium
