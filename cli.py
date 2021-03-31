@@ -35,7 +35,7 @@ class CLI:
                     )
                     continue
                 if entry == "s":
-                    App.save_app()
+                    self._app.save_app()
                     continue
                 elif entry == "1":
                     self._create_user()
