@@ -19,7 +19,7 @@ class CLI:
 
     def _user_overview(self):
         while True:
-            if self._app.is_empty:
+            if self._app.is_empty():
                 entry = input(
                     """There are no Users yet.
                     Please insert [1] to add a new User
