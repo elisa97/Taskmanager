@@ -3,7 +3,7 @@
 1. [General Info](#general-info)
 2. [Technologies](#technologies)
 3. [Installation](#installation)
-4. [Collaboration](#collaboration)
+4. [Usage](#usage)
 
 ### General Info
 ***
@@ -31,26 +31,26 @@ To execute this programm, these programms are required:
 ### Installation of *Python3*
 ***
 To install *Python3*, download the programm [here](https://www.python.org/downloads/)
-or use the following command line (for Linux-Users):
+or use the following command line (for Linux-Users):  
 `$ sudo apt-get install python3 `
 
 ### Installation of *Python3 -pip3*
 ***
-To install *Python3 -pip3*, use the following command line (for Linux-Users):
+To install *Python3 -pip3*, use the following command line (for Linux-Users):  
 `$ sudo apt install python3-pip `
 
 ### Installation of *TkInter*
 ***
 To install *TkInter*, check out [here](https://tkdocs.com/tutorial/install.html)
-or use the following command line (for Linux-Users):
+or use the following command line (for Linux-Users):  
 `$ sudo apt-get install python3-tk `
 
 
 
-## Collaboration
+## Usage
 ***
 
-### How to execute the programm
+### How to start the programm
 ***
 If you have installed the required programms, you can use the following command lines to start this programm:
 * if you have the zip file  *TaskManager_119599.zip* on your computer
@@ -60,7 +60,7 @@ If you have installed the required programms, you can use the following command 
     $ cd /TaskManager
     $ python3 main.py
     ```
-* from github:
+* from [github](https://github.com/elisa97/Taskmanager):
     ```
     $ git clone https://github.com/elisa97/Taskmanager
     $ cd ../path/to/the/file
