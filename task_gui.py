@@ -5,13 +5,13 @@ from task import *
 class Task_GUI(tk.Frame):
     """
     Task_GUI Object contains:
-    task, 
-    super_project_gui, 
-    master, 
-    check_var_notes (for showing Task Notes), 
+    task,
+    super_project_gui,
+    master,
+    check_var_notes (for showing Task Notes),
     check_var_done (for marking Task as done)
 
-    can be constructed with 
+    can be constructed with
     'Task_GUI(task: Task, root: tkinter.Frame(),
              super_project_gui: Project_GUI)'
     """
@@ -110,10 +110,10 @@ class Task_GUI(tk.Frame):
         )
 
         self._bttn_cancel_task = tk.Button(
-            self._edit_window, text="cancel", activebackground="red"
+            self._edit_window, text="cancel", activebackground="red", width=5
         )
         self._bttn_save_task = tk.Button(
-            self._edit_window, text="save", activebackground="green"
+            self._edit_window, text="save", activebackground="green", width=5
         )
 
         self._lb_priority = tk.Listbox(self._edit_window, width=9, height=4)
@@ -123,7 +123,9 @@ class Task_GUI(tk.Frame):
         self._lb_priority.insert(3, "high")
 
         self._entry_task_name = tk.Entry(self._edit_window)
-        self._entry_task_notes = tk.Text(self._edit_window, width=20, height=5)
+        self._entry_task_notes = tk.Text(
+            self._edit_window, width=20, height=5
+        )
 
         # layout
         self._lbl_dscrb_name.grid(row=0, column=0, rowspan=2)
@@ -145,7 +147,7 @@ class Task_GUI(tk.Frame):
 
     def _save_task(self):
         """
-        Writes the entry information from the Edit Task Window 
+        Writes the entry information from the Edit Task Window
         into the Task
 
         Returns the edited Task

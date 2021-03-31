@@ -87,17 +87,27 @@ class App_GUI(tk.Frame):
         self._user_window.title("User Overview")
 
         # elements
-        self._lbl_user_name = tk.Label(self._user_window, text="Users: ")
+        self._lbl_user_name = tk.Label(
+            self._user_window, text="Users: ", width=15
+        )
         self._lb_users = tk.Listbox(self._user_window)
         self._bttn_add_user = tk.Button(
-            self._user_window, text="+ add a new User"
+            self._user_window, text="+ add a new User", width=15
         )
-        self._bttn_edit_user = tk.Button(self._user_window, text="edit User")
+        self._bttn_edit_user = tk.Button(
+            self._user_window, text="edit User", width=15
+        )
         self._bttn_delete_user = tk.Button(
-            self._user_window, text="delete User", activebackground="red"
+            self._user_window,
+            text="delete User",
+            activebackground="red",
+            width=15,
         )
         self._bttn_select_user = tk.Button(
-            self._user_window, text="select User", activebackground="green"
+            self._user_window,
+            text="select User",
+            activebackground="green",
+            width=15,
         )
 
         # layout
@@ -141,10 +151,16 @@ class App_GUI(tk.Frame):
         )
         self._entry_user_name = tk.Entry(self._new_user_window)
         self._bttn_save_new_user = tk.Button(
-            self._new_user_window, text="save", activebackground="green"
+            self._new_user_window,
+            text="save",
+            activebackground="green",
+            width=5,
         )
         self._bttn_cancel_new_user = tk.Button(
-            self._new_user_window, text="cancel", activebackground="red"
+            self._new_user_window,
+            text="cancel",
+            activebackground="red",
+            width=5,
         )
 
         # layout
@@ -202,10 +218,16 @@ class App_GUI(tk.Frame):
         self._entry_edit_user_name = tk.Entry(self._edit_user_window)
         self._entry_edit_user_name.insert(0, self._user_to_edit.name)
         self._bttn_save_edit_user = tk.Button(
-            self._edit_user_window, text="save", activebackground="green"
+            self._edit_user_window,
+            text="save",
+            activebackground="green",
+            width=5,
         )
         self._bttn_cancel_edit_user = tk.Button(
-            self._edit_user_window, text="cancel", activebackground="red"
+            self._edit_user_window,
+            text="cancel",
+            activebackground="red",
+            width=5,
         )
 
         # layout
@@ -216,7 +238,9 @@ class App_GUI(tk.Frame):
 
         # eventhandler
         self._bttn_save_edit_user["command"] = self._save_edited_user
-        self._bttn_cancel_edit_user["command"] = self._edit_user_window.destroy
+        self._bttn_cancel_edit_user[
+            "command"
+        ] = self._edit_user_window.destroy
 
     def _save_edited_user(self):
         """

@@ -83,7 +83,9 @@ class Project_GUI(tk.Frame):
             self._fr_pro_overview, text="+ add new Task", width=45
         )
         self._check_pro_fr_hide = tk.Checkbutton(
-            self._fr_pro_overview, text="hide Tasks", var=self._check_var_frame
+            self._fr_pro_overview,
+            text="hide Tasks",
+            var=self._check_var_frame,
         )
         self._check_show_done_tasks = tk.Checkbutton(
             self._fr_pro_overview,
@@ -97,7 +99,9 @@ class Project_GUI(tk.Frame):
         self._check_pro_fr_hide.grid(row=4, column=0)
         self._check_show_done_tasks.grid(row=4, column=2)
         self._bttn_pro_del_all_tasks.grid(row=5, column=0)
-        self._bttn_pro_add_task.grid(row=6, column=0, sticky="w", columnspan=3)
+        self._bttn_pro_add_task.grid(
+            row=6, column=0, sticky="w", columnspan=3
+        )
 
         # eventhandler
         self._bttn_pro_add_task["command"] = self._create_task_gui
@@ -116,7 +120,7 @@ class Project_GUI(tk.Frame):
             height=5,
             width=10,
             anchor="nw",
-            bg=self._project.color.value
+            bg=self._project.color.value,
         )
 
         # layout
@@ -171,10 +175,10 @@ class Project_GUI(tk.Frame):
         )
 
         self._bttn_cancel_task = tk.Button(
-            self.task_window, text="cancel", activebackground="red"
+            self.task_window, text="cancel", activebackground="red", width=5
         )
         self._bttn_save_task = tk.Button(
-            self.task_window, text="save", activebackground="green"
+            self.task_window, text="save", activebackground="green", width=5
         )
 
         self._lb_priority = tk.Listbox(self.task_window, width=9, height=4)

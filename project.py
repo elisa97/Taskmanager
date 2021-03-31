@@ -7,14 +7,14 @@ class Color(enum.Enum):
     Enum for Project Color
     """
 
-    black = "black"
+    white = "white"
     blue = "blue"
     red = "red"
     green = "green"
     yellow = "yellow"
     purple = "purple"
     orange = "orange"
-    white = "white"
+    pink = "pink"
 
 
 def find_color(color_string):

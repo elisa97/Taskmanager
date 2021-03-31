@@ -50,30 +50,35 @@ class ProjectManager_GUI(tk.Frame):
         # projectmanager frame
         # elements
         self._bttn_create_project = tk.Button(
-            self._fr_projectmanager, text="create Project"
+            self._fr_projectmanager, text="+ add a new Project", width=15
         )
         self._bttn_show_project = tk.Button(
             self._fr_projectmanager,
             text="show Project",
             state="normal",
             activebackground="green",
+            width=15,
         )
         self._bttn_edit_project = tk.Button(
-            self._fr_projectmanager, text="edit Project", state="normal"
+            self._fr_projectmanager,
+            text="edit Project",
+            state="normal",
+            width=15,
         )
         self._bttn_delete_project = tk.Button(
             self._fr_projectmanager,
             text="delete Project",
             state="normal",
             activebackground="red",
+            width=15,
         )
         self._lb_projects = tk.Listbox(self._fr_projectmanager)
 
         # layout
         self._lb_projects.grid(row=3, column=0, rowspan=8)
         self._bttn_create_project.grid(row=0, column=0)
-        self._bttn_show_project.grid(row=1, column=0)
-        self._bttn_edit_project.grid(row=12, column=0)
+        self._bttn_show_project.grid(row=12, column=0)
+        self._bttn_edit_project.grid(row=13, column=0)
         self._bttn_delete_project.grid(row=14, column=0)
 
         # eventhandler
@@ -117,23 +122,29 @@ class ProjectManager_GUI(tk.Frame):
         )
 
         self._bttn_cancel_project = tk.Button(
-            self.project_window, text="cancel", activebackground="red"
+            self.project_window,
+            text="cancel",
+            activebackground="red",
+            width=5,
         )
         self._bttn_save_project = tk.Button(
-            self.project_window, text="save", activebackground="green"
+            self.project_window,
+            text="save",
+            activebackground="green",
+            width=5,
         )
 
         self._lb_color_project = tk.Listbox(
             self.project_window, width=7, height=8
         )
-        self._lb_color_project.insert(0, "black")
+        self._lb_color_project.insert(0, "white")
         self._lb_color_project.insert(1, "blue")
         self._lb_color_project.insert(2, "red")
         self._lb_color_project.insert(3, "green")
         self._lb_color_project.insert(4, "yellow")
         self._lb_color_project.insert(5, "purple")
         self._lb_color_project.insert(6, "orange")
-        self._lb_color_project.insert(7, "white")
+        self._lb_color_project.insert(7, "pink")
 
         self._entry_project_name = tk.Entry(self.project_window)
         self._entry_project_notes = tk.Text(
@@ -142,15 +153,17 @@ class ProjectManager_GUI(tk.Frame):
 
         # layout
         self._lbl_dscrb_project_name.grid(row=0, column=0, rowspan=2)
-        self._entry_project_name.grid(row=0, column=1, rowspan=2, columnspan=2)
+        self._entry_project_name.grid(
+            row=0, column=1, rowspan=2, columnspan=2
+        )
         self._lbl_dscrb_project_notes.grid(row=3, column=0)
         self._entry_project_notes.grid(
             row=3, column=1, columnspan=2, rowspan=3
         )
         self._lbl_dscrb_project_color.grid(row=1, column=4, columnspan=2)
         self._lb_color_project.grid(row=2, column=4, columnspan=2, rowspan=4)
-        self._bttn_cancel_project.grid(row=7, column=5)
-        self._bttn_save_project.grid(row=7, column=4)
+        self._bttn_cancel_edit.grid(row=7, column=5)
+        self._bttn_save_edit.grid(row=7, column=4)
 
         # eventhandler
         self._bttn_save_project["command"] = self.save_new_project
@@ -213,24 +226,26 @@ class ProjectManager_GUI(tk.Frame):
         )
 
         self._bttn_cancel_edit = tk.Button(
-            self._edit_window, text="cancel", activebackground="red"
+            self._edit_window, text="cancel", activebackground="red", width=5
         )
         self._bttn_save_edit = tk.Button(
-            self._edit_window, text="save", activebackground="green"
+            self._edit_window, text="save", activebackground="green", width=5
         )
 
         self._lb_color_edit = tk.Listbox(self._edit_window, width=7, height=8)
-        self._lb_color_edit.insert(0, "black")
+        self._lb_color_edit.insert(0, "white")
         self._lb_color_edit.insert(1, "blue")
         self._lb_color_edit.insert(2, "red")
         self._lb_color_edit.insert(3, "green")
         self._lb_color_edit.insert(4, "yellow")
         self._lb_color_edit.insert(5, "purple")
         self._lb_color_edit.insert(6, "orange")
-        self._lb_color_edit.insert(7, "white")
+        self._lb_color_edit.insert(7, "pink")
 
         self._entry_edit_name = tk.Entry(self._edit_window)
-        self._entry_edit_notes = tk.Text(self._edit_window, width=20, height=5)
+        self._entry_edit_notes = tk.Text(
+            self._edit_window, width=20, height=5
+        )
 
         # layout
         self._lbl_dscrb_edit_name.grid(row=0, column=0, rowspan=2)
@@ -252,7 +267,7 @@ class ProjectManager_GUI(tk.Frame):
 
     def save_edited_project(self):
         """
-        Writes the entry information from the Edit Project Window 
+        Writes the entry information from the Edit Project Window
         into the Project
 
         Returns the edited Project
