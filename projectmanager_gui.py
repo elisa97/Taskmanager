@@ -282,7 +282,7 @@ class ProjectManager_GUI(tk.Frame):
 
     def _update_project(self):
         """
-        Build a new Project_GUI into after destroying the existing frame
+        Build a new Project_GUI after destroying the existing frame,
         if present
         """
         try:
