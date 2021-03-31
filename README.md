@@ -59,6 +59,8 @@ If you **have installed the required programms**, you can use the following comm
     $ cd ../path/to/the/file
     $ python3 main.py
     ```
+* if you want to start the CLI of the programm, please use the following command line:  
+    `$ python3 cli.py`
 
 ### First steps
 ***
