@@ -58,12 +58,12 @@ class CLI:
                     self._app.save_app()
                 try: 
                     int(user)
-                except ValueError:
+                except:
                     print("{} is no valid entry.".format(user))
                     continue
                 try:
                     self._get_selected_user(user)
-                except ValueError:
+                except IndexError:
                     print("{} is no valid entry.".format(user))
                     continue
                 selection = input(
@@ -76,7 +76,6 @@ class CLI:
                 )
                 if selection == 1:
                     self.select_user()
-                    continue
                 elif selection == 2:
                     self._edit_user()
                     continue
@@ -136,6 +135,7 @@ class CLI:
 
     def _delete_user(self):
         self._app.delete_projectmanager(self._selected_user)
+        self._select_user = None
 
     def _select_user(self):
         while True:
@@ -183,8 +183,13 @@ class CLI:
                     self._app.save_app()
                     continue
                 try:
+                    int(pro)
+                except:
+                    print("{} is no valid entry.".format(pro))
+                    continue
+                try:
                     self._get_selected_project(pro)
-                except ValueError:
+                except IndexError:
                     print("{} is no valid entry.".format(pro))
                     continue
                 selection = input(
@@ -279,6 +284,7 @@ class CLI:
 
     def _delete_project(self):
         self._selected_user.delete_project(self._selected_project)
+        self._selected_project = None
 
     def _select_project(self):
         while True:
@@ -325,8 +331,13 @@ class CLI:
                     self._app.save_app()
                     continue
                 try:
+                    int(task)
+                except:
+                    print("{} is no valid entry.".format(task))
+                    continue
+                try:
                     self._get_selected_task(task)
-                except ValueError:
+                except IndexError:
                     print("{} is no valid entry.".format(task))
                     continue
                 print(
@@ -455,6 +466,7 @@ class CLI:
 
     def _delete_task(self):
         self._selected_project.delete_task(self._selected_task)
+        self._selected_task = None
 
 if __name__ == '__main__':
     cli = CLI()
