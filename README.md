@@ -23,7 +23,6 @@ A list of technologies used within the project:
 To execute this programm, these programms are required:
 * Python3
 * TkInter
-    * Python3 -pip3
 
 
 ### Installation of *Python3*
@@ -32,10 +31,6 @@ To install *Python3*, download the programm [here](https://www.python.org/downlo
 or use the following command line (for Linux-Users):  
 `$ sudo apt-get install python3 `
 
-### Installation of *Python3 -pip3*
-***
-To install *Python3 -pip3*, use the following command line (for Linux-Users):  
-`$ sudo apt install python3-pip `
 
 ### Installation of *TkInter*
 ***
@@ -94,7 +89,7 @@ So please don't wonder, if there's just a small window with a slim menu. Follow 
     before closing the programm, please be sure you've saved your new Users, Projects and Tasks:
     * select *file* in the menu of the main window
     * click *save file*, then all changes will be saved
-    * you can close the main window afterwards and when you'll start the programm the next time, you're changes will be there
+    * you can close the main window afterwards and when you'll start the programm the next time, your changes will be there
 
 ### How to go on using the programm
 ***
@@ -104,7 +99,7 @@ Now to the further usage and features of this programm:
 
 * ***Users*** 
     Only 1 User can be selected at the same time.
-    Users can handle arbitrary Projects and a Project can include arbitrary Tasks. But there connected to the User:  
+    Users can handle arbitrary Projects and a Project can include arbitrary Tasks. But they are connected to the User:  
     **Projects are User specific and can't be shared with other Users!**
     * create *Users*
         like described in the [First Steps](###first-steps)
