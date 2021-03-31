@@ -15,6 +15,10 @@ class CLI:
             please enter the character in the brackets,\n 
             e.g. [s] save: press 's' if you want to save"""
         )
+        try:
+            self._app.load_app()
+        except:
+            pass
         self._user_overview()
 
     def _user_overview(self):
@@ -178,7 +182,7 @@ class CLI:
                     please insert [u]. \n 
                     If you want to save the programm, please insert [s]."""
                 )
-                print(self._app)
+                print(self._selected_user)
                 pro = input()
                 if pro == "n":
                     self._create_project()
@@ -194,7 +198,7 @@ class CLI:
                     print("{} is no valid entry.".format(pro))
                     continue
                 try:
-                    self._get_select_project(pro)
+                    self._get_selected_project(pro)
                 except IndexError:
                     print("{} is no valid entry.".format(pro))
                     continue
@@ -203,7 +207,7 @@ class CLI:
                     Options:    [1] select the Project  \
                                 [2] edit the Project  \
                                 [3] delete the Project""".format(
-                        self._select_project.name
+                        self._selected_project.name
                     )
                 )
                 try:
@@ -213,7 +217,7 @@ class CLI:
                     continue
                 selection = int(sel)
                 if selection == 1:
-                    self.select_project()
+                    self._select_project()
                     continue
                 elif selection == 2:
                     self._edit_project()
@@ -235,8 +239,8 @@ class CLI:
             print(
                 """Project name: {}. \n 
                 Project notes: {} \n 
-                If you want to save the User name, please insert [s]\n 
-                If you want to change the User name, 
+                If you want to save the Project name, please insert [s]\n 
+                If you want to change the Project name, 
                 please insert any character EXCEPT [s] and [c] \n 
                 If you want to cancel, please insert [c].""".format(
                     pro_name, pro_notes
@@ -256,9 +260,9 @@ class CLI:
     def _edit_project(self):
         while True:
             print(
-                "Current Project name: {} \n \
-                Current Project notes: {} \
-                ".format(
+                """Current Project name: {} \n
+                Current Project notes: {} 
+                """.format(
                     self._selected_project.name, self._selected_project.notes
                 )
             )
@@ -332,7 +336,7 @@ class CLI:
                         If you want to go back to the Project Overview, 
                         please insert [p]."""
                 )
-                print(self._app)
+                print(self._selected_project)
                 task = input()
                 if task == "n":
                     self._create_project()
@@ -413,7 +417,7 @@ class CLI:
             )
             entry = input()
             if entry == "s":
-                self.new_task = self._selected_user.create_project()
+                self.new_task = self._selected_project.create_task()
                 self.new_task.name = task_name
                 self.new_task.notes = task_notes
                 self.new_task.priority = task_priority

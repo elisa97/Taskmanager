@@ -73,9 +73,9 @@ class Task:
             "Task Name"
             + self.name
             + " State:"
-            + self.state
-            + " Piority"
-            + self.priority
+            + str(self.state)
+            + " Piority: "
+            + str(self.priority)
             + " Notes: "
             + self.notes
         )
