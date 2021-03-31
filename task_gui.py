@@ -73,7 +73,6 @@ class Task_GUI(tk.Frame):
         self._bttn_task_delete.grid(row=0, column=6, sticky="e")
 
         self._lbl_task_notes.grid_forget()
-        self._lbl_dscrb_notes.grid_forget()
 
         # eventhandler
         self._bttn_task_delete["command"] = self.delete_task_gui
