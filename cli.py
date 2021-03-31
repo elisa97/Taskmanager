@@ -56,7 +56,7 @@ class CLI:
                     continue
                 elif user == "s":
                     self._app.save_app()
-                try: 
+                try:
                     int(user)
                 except:
                     print("{} is no valid entry.".format(user))
@@ -485,6 +485,7 @@ class CLI:
         self._selected_project.delete_task(self._selected_task)
         self._selected_task = None
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     cli = CLI()
     cli.start_programm()

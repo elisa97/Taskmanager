@@ -67,4 +67,5 @@ class App:
             printed_projectmanagers += '[' + str(i) + "] "
             printed_projectmanagers += str(projectmanager)
             printed_projectmanagers += "\n"
+            i +=1
         return str(" Users: \n" + printed_projectmanagers)

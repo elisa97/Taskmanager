@@ -9,6 +9,7 @@
 ***
 This is a tool to simply organize your tasks and projects.
 You can add, edit, delete and check tasks which you can arrange in projects. It gives you the opportunity to create multiple users who can create their own projects. 
+This tool is created by *Elisa Kluge*.
 
 
 ## Technologies

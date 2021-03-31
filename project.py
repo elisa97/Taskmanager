@@ -82,16 +82,15 @@ class Project:
         Returns a String with the Project information
         """
         printedtasks = ""
+        i = 0
         for task in self.tasks:
+            printedtasks += "[" + str(i) + "] "
             printedtasks += str(task)
             printedtasks += "\n"
+            i += 1
         return str(
             " Name: "
             + self.name
-            + " ProjectManager: "
-            + self._projectmanager.name
-            + " Color: "
-            + repr(self.color)
             + " Notes: "
             + self.notes
             + " Tasks: \n"

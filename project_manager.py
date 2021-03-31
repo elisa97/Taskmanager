@@ -43,7 +43,11 @@ class ProjectManager:
         Returns a String with the ProjectManager information
         """
         printed_projects = ""
+        i = 0
         for project in self.projects:
+            printed_projects += "[" + str(i) + "] "
             printed_projects += str(project)
             printed_projects += "\n"
+            i += 1
+
         return str("Name: " + self.name + " Projects: \n" + printed_projects)

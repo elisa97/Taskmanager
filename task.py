@@ -21,6 +21,7 @@ class Priority(enum.IntEnum):
     medium = 2
     high = 3
 
+
 def find_priority(priority_number):
     """
     Finds Priority for a given Integer
@@ -71,12 +72,10 @@ class Task:
         return str(
             "Task Name"
             + self.name
-            + " Project:"
-            + self.project.name
             + " State:"
-            + repr(self.state)
+            + self.state
             + " Piority"
-            + repr(self.priority)
+            + self.priority
             + " Notes: "
             + self.notes
         )
