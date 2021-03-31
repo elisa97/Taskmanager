@@ -55,9 +55,9 @@ or use the following command line (for Linux-Users):
 If you have installed the required programms, you can use the following command lines to start this programm:
 * if you have the zip file  *TaskManager_119599.zip* on your computer
     ```
-    $ cd ../path/to/the/zip-file
-    $ unzip TaskManager.zip
-    $ cd /TaskManager
+    $ cd ../path/to/the/zip-file/location
+    $ unzip TaskManager_119599.zip
+    $ cd /TaskManager_119599
     $ python3 main.py
     ```
 * from [github](https://github.com/elisa97/Taskmanager):
@@ -66,3 +66,5 @@ If you have installed the required programms, you can use the following command 
     $ cd ../path/to/the/file
     $ python3 main.py
     ```
+
+### 

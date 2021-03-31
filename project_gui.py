@@ -70,7 +70,7 @@ class Project_GUI(tk.Frame):
         self._lbl_pro_name = tk.Label(
             self._fr_pro_overview,
             text=self._project.name,
-            width=10,
+            width=20,
             font="28",
             bg=self._project.color.value,
         )
@@ -116,6 +116,7 @@ class Project_GUI(tk.Frame):
             height=5,
             width=10,
             anchor="nw",
+            bg=self._project.color.value
         )
 
         # layout
