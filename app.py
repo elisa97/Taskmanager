@@ -64,7 +64,7 @@ class App:
         printed_projectmanagers = ""
         i = 0
         for projectmanager in self.projectmanagers:
-            printed_projectmanagers += "[" + i + "] "
+            printed_projectmanagers += '[' + str(i) + "] "
             printed_projectmanagers += str(projectmanager)
             printed_projectmanagers += "\n"
         return str(" Users: \n" + printed_projectmanagers)

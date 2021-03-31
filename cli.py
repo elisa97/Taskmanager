@@ -56,6 +56,11 @@ class CLI:
                     continue
                 elif user == "s":
                     self._app.save_app()
+                try: 
+                    int(user)
+                except ValueError:
+                    print("{} is no valid entry.".format(user))
+                    continue
                 try:
                     self._get_selected_user(user)
                 except ValueError:
@@ -71,15 +76,19 @@ class CLI:
                 )
                 if selection == 1:
                     self.select_user()
+                    continue
                 elif selection == 2:
                     self._edit_user()
+                    continue
                 elif selection == 3:
                     self._delete_user()
+                    continue
                 else:
                     continue
 
     def _get_selected_user(self, number):
-        self._selected_user = self._app.projectmanagers[number]
+        num = int(number)
+        self._selected_user = self._app.projectmanagers[num]
 
     def _create_user(self):
         while True:
@@ -147,6 +156,7 @@ class CLI:
                     continue
                 if entry == "s":
                     App.save_app()
+                    continue
                 elif entry == "1":
                     self._create_project()
                     continue
@@ -171,6 +181,7 @@ class CLI:
                     break
                 elif pro == "s":
                     self._app.save_app()
+                    continue
                 try:
                     self._get_selected_project(pro)
                 except ValueError:
@@ -186,15 +197,19 @@ class CLI:
                 )
                 if selection == 1:
                     self.select_project()
+                    continue
                 elif selection == 2:
                     self._edit_project()
+                    continue
                 elif selection == 3:
                     self._delete_project()
+                    continue
                 else:
                     continue
 
     def _get_selected_project(self, number):
-        self._selected_project = self._selected_user.projects[number]
+        num = int(number)
+        self._selected_project = self._selected_user.projects[num]
 
     def _create_project(self):
         while True:
@@ -284,6 +299,7 @@ class CLI:
                     continue
                 if entry == "s":
                     App.save_app()
+                    continue
                 elif entry == "1":
                     self._create_task()
                     continue
@@ -307,6 +323,7 @@ class CLI:
                     break
                 elif task == "s":
                     self._app.save_app()
+                    continue
                 try:
                     self._get_selected_task(task)
                 except ValueError:
@@ -334,7 +351,8 @@ class CLI:
                 continue
 
     def _get_selected_task(self, number):
-        self._selected_task = self._selected_project.tasks[number]
+        num = int(number)
+        self._selected_task = self._selected_project.tasks[num]
 
     def _change_state(self):
         if self._selected_task.state == 0:
