@@ -48,7 +48,7 @@ class Task_GUI(tk.Frame):
             self, text=self._task.name, width=20, anchor="w"
         )
         self._lbl_task_notes = tk.Label(
-            self._super_project_gui._fr_pro_task_notes, text=self._task.notes
+            self._super_project_gui.fr_pro_task_notes, text=self._task.notes
         )
 
         self._check_task_done = tk.Checkbutton(

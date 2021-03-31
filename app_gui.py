@@ -41,9 +41,9 @@ class App_GUI(tk.Frame):
         """
 
         # frames
-        self.fr_projectmanager_gui = tk.Frame(self)
+        self._fr_projectmanager_gui = tk.Frame(self)
 
-        self.fr_projectmanager_gui.grid(row=3, column=0, rowspan=10)
+        self._fr_projectmanager_gui.grid(row=3, column=0, rowspan=10)
 
         # elements app menu
         self._menu = tk.Menu(self._root)
@@ -260,12 +260,12 @@ class App_GUI(tk.Frame):
         Build a new ProjectManager_GUI for the selected User/ProjectManager
         after destroying the existing ProjectManager_GUI, if present
         """
-        for widget in self.fr_projectmanager_gui.winfo_children():
+        for widget in self._fr_projectmanager_gui.winfo_children():
             widget.destroy()
 
         self._find_active_user()
         self._shown_projectmanager_gui = ProjectManager_GUI(
-            self._found_user, self.fr_projectmanager_gui, self._root
+            self._found_user, self._fr_projectmanager_gui, self._root
         )
         self._shown_projectmanager_gui.grid()
         self._build_listboxes_gui()

@@ -124,7 +124,7 @@ class Project_GUI(tk.Frame):
 
         # fr_pro_tasks
         # elements
-        self._fr_pro_task_notes = tk.Frame(
+        self.fr_pro_task_notes = tk.Frame(
             self._fr_pro_tasks, height=20, width=20, bd=2, relief="groove"
         )
         self._fr_pro_task_list = tk.Frame(
@@ -132,12 +132,12 @@ class Project_GUI(tk.Frame):
         )
 
         # layout
-        self._fr_pro_task_notes.grid(row=0, column=10, sticky="n")
+        self.fr_pro_task_notes.grid(row=0, column=10, sticky="n")
         self._fr_pro_task_list.grid(row=0, column=0, sticky="n")
 
         # fr_pro_task_notes
         self._lbl_dscrb_task_notes = tk.Label(
-            self._fr_pro_task_notes, text="Task Notes: "
+            self.fr_pro_task_notes, text="Task Notes: "
         )
         self._lbl_dscrb_task_notes.grid(row=0, column=0)
 
