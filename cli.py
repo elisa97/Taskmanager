@@ -66,7 +66,7 @@ class CLI:
                 except IndexError:
                     print("{} is no valid entry.".format(user))
                     continue
-                selection = input(
+                sel = input(
                     """Your selected User is: {}.\n 
                     Options:    [1] select the User  \
                                 [2] edit the User  \
@@ -74,8 +74,14 @@ class CLI:
                         self._selected_user.name
                     )
                 )
+                try:
+                    int(sel)
+                except:
+                    print("{} is no valid entry.".format(sel))
+                    continue
+                selection = int(sel)
                 if selection == 1:
-                    self.select_user()
+                    self._select_user()
                 elif selection == 2:
                     self._edit_user()
                     continue
@@ -135,7 +141,7 @@ class CLI:
 
     def _delete_user(self):
         self._app.delete_projectmanager(self._selected_user)
-        self._select_user = None
+        self._selected_user = None
 
     def _select_user(self):
         while True:
@@ -188,11 +194,11 @@ class CLI:
                     print("{} is no valid entry.".format(pro))
                     continue
                 try:
-                    self._get_selected_project(pro)
+                    self._get_select_project(pro)
                 except IndexError:
                     print("{} is no valid entry.".format(pro))
                     continue
-                selection = input(
+                sel = input(
                     """Your selected Project is: {}.\n 
                     Options:    [1] select the Project  \
                                 [2] edit the Project  \
@@ -200,6 +206,12 @@ class CLI:
                         self._select_project.name
                     )
                 )
+                try:
+                    int(sel)
+                except:
+                    print("{} is no valid entry.".format(sel))
+                    continue
+                selection = int(sel)
                 if selection == 1:
                     self.select_project()
                     continue
@@ -340,7 +352,7 @@ class CLI:
                 except IndexError:
                     print("{} is no valid entry.".format(task))
                     continue
-                print(
+                sel = input(
                     """Your selected Task is: {}.\n 
                         Options:    [1] change Task state  \
                                     [2] edit the Task  \
@@ -348,18 +360,23 @@ class CLI:
                         self._selected_task.name
                     )
                 )
-            selection = input()
-            if selection == 1:
-                self._change_state()
-                continue
-            elif selection == 2:
-                self._edit_task()
-                continue
-            elif selection == 3:
-                self._delete_task()
-                continue
-            else:
-                continue
+                try:
+                    int(sel)
+                except:
+                    print("{} is no valid entry.".format(sel))
+                    continue
+                selection = int(sel)
+                if selection == 1:
+                    self._change_state()
+                    continue
+                elif selection == 2:
+                    self._edit_task()
+                    continue
+                elif selection == 3:
+                    self._delete_task()
+                    continue
+                else:
+                    continue
 
     def _get_selected_task(self, number):
         num = int(number)
