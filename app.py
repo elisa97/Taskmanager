@@ -62,7 +62,9 @@ class App:
         Returns a String with the App information
         """
         printed_projectmanagers = ""
+        i = 0
         for projectmanager in self.projectmanagers:
+            printed_projectmanagers += "[" + i + "] "
             printed_projectmanagers += str(projectmanager)
             printed_projectmanagers += "\n"
-        return str(" Projectmanagers: \n" + printed_projectmanagers)
+        return str(" Users: \n" + printed_projectmanagers)

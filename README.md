@@ -10,8 +10,6 @@
 This is a tool to simply organize your tasks and projects.
 You can add, edit, delete and check tasks which you can arrange in projects. It gives you the opportunity to create multiple users who can create their own projects. 
 
-Write down the general informations of your project. It is worth to always put a project status in the Readme file. This is where you can add it. 
-
 
 ## Technologies
 ***
