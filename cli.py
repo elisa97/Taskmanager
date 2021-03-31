@@ -13,17 +13,17 @@ class CLI:
             -------------------------------------------------------------\n \
             To interact with this CLI,\
             please enter the character in the brackets,\n \
-            e.g. [s] save: ipress 's' if you want to save"
+            e.g. [s] save: press 's' if you want to save"
         )
 
     def _user_overview(self):
         while True:
             if self._app.is_empty:
-                print(
+                entry = input(
                     "There are no Users yet. \
-                    Please insert [1] to add a new User."
+                    Please insert [1] to add a new User \
+                    or [s] to save the programm."
                 )
-                entry = sys.argv[1]
                 try:
                     entry == 1 or entry == "s"
                 except ValueError:
@@ -48,18 +48,18 @@ class CLI:
                     If you want to save the programm, please insert [s]."
                 )
                 print(self._app)
-                user = sys.argv[1]
+                user = input()
                 if user == "n":
                     self._create_user()
                     continue
-                elif user == 's':
+                elif user == "s":
                     self._app.save_app()
                 try:
                     self._get_selected_user(user)
                 except ValueError:
                     print("{} is no valid entry.".format(user))
                     continue
-                print(
+                selection = input(
                     "Your selected User is: {}.\n \
                     Options:    [1] select the User  \
                                 [2] edit the User  \
@@ -67,7 +67,6 @@ class CLI:
                         self._selected_user.name
                     )
                 )
-                selection = sys.argv[1]
                 if selection == 1:
                     self.select_user()
                 elif selection == 2:
@@ -82,8 +81,7 @@ class CLI:
 
     def _create_user(self):
         while True:
-            print("Please insert the User name: ")
-            user_name = sys.argv[1]
+            user_name = input("Please insert the User name: ")
             print(
                 "User name: {}. \n \
                 If you want to save the User name, please insert [s]\n \
@@ -93,7 +91,7 @@ class CLI:
                     user_name
                 )
             )
-            entry = sys.argv[1]
+            entry = input()
             if entry == "s":
                 self.new_user = self._app.create_projectmanager()
                 self.new_user.name = user_name
@@ -105,13 +103,8 @@ class CLI:
 
     def _edit_user(self):
         while True:
-            print(
-                "Current User name: {}. \n \
-                Please insert a new User name.".format(
-                    self._selected_user
-                )
-            )
-            user_name = sys.argv[1]
+            print("Current User name: {}".format(self._selected_user))
+            user_name = input("Please insert a new User name")
             print(
                 "User name: {}. \n \
                 If you want to save the User name, please insert [s]\n \
@@ -121,7 +114,7 @@ class CLI:
                     user_name
                 )
             )
-            entry = sys.argv[1]
+            entry = input()
             if entry == "s":
                 self._selected_user.name = user_name
                 break
@@ -140,7 +133,7 @@ class CLI:
                     "There are no Projects yet. \
                     Please insert [1] to add a new Project."
                 )
-                entry = sys.argv[1]
+                entry = input()
                 try:
                     entry == 1 or entry == "s"
                 except ValueError:
@@ -161,25 +154,27 @@ class CLI:
                 print(
                     "Here is a Project overview. \n \
                     Select a Project by entering its number.\n \
-                    If you want to create a new Project, please insert [n]. \n \
-                    If you want to go back to User Overview, please insert [u]. \n \
+                    If you want to create a new Project, \
+                    please insert [n]. \n \
+                    If you want to go back to User Overview,\
+                    please insert [u]. \n \
                     If you want to save the programm, please insert [s]."
                 )
                 print(self._app)
-                pro = sys.argv[1]
+                pro = input()
                 if pro == "n":
                     self._create_project()
                     continue
-                elif pro == 'u':
+                elif pro == "u":
                     break
-                elif pro == 's':
+                elif pro == "s":
                     self._app.save_app()
                 try:
                     self._get_selected_project(pro)
                 except ValueError:
                     print("{} is no valid entry.".format(pro))
                     continue
-                print(
+                selection = input(
                     "Your selected Project is: {}.\n \
                     Options:    [1] select the Project  \
                                 [2] edit the Project  \
@@ -187,7 +182,6 @@ class CLI:
                         self._select_project.name
                     )
                 )
-                selection = sys.argv[1]
                 if selection == 1:
                     self.select_project()
                 elif selection == 2:
@@ -196,25 +190,25 @@ class CLI:
                     self._delete_project()
                 else:
                     continue
-            
+
     def _get_selected_project(self, number):
         self._selected_project = self._selected_user.projects[number]
 
     def _create_project(self):
         while True:
-            print("Please insert the Project name: ")
-            pro_name = sys.argv[1]
-            print('Please insert Project notes: ')
-            pro_notes = sys.argv[1]
+            pro_name = input("Please insert the Project name: ")
+            pro_notes = input("Please insert Project notes: ")
             print(
                 "Project name: {}. \n \
                 Project notes: {} \n \
                 If you want to save the User name, please insert [s]\n \
                 If you want to change the User name, \
                 please insert any character EXCEPT [s] and [c] \n \
-                If you want to cancel, please insert [c].".format(pro_name, pro_notes)
+                If you want to cancel, please insert [c].".format(
+                    pro_name, pro_notes
+                )
             )
-            entry = sys.argv[1]
+            entry = input()
             if entry == "s":
                 self.new_pro = self._selected_user.create_project()
                 self.new_pro.name = pro_name
@@ -229,19 +223,22 @@ class CLI:
         while True:
             print(
                 "Current Project name: {} \n \
-                Current Project notes: {} \n \
-                Please insert a new Project name.\n \
-                If you do not want to change the name, insert [x].".format(
+                Current Project notes: {} \
+                ".format(
                     self._selected_project.name, self._selected_project.notes
                 )
             )
-            pro_name = sys.argv[1]
-            print('Please insert Project notes:  \n \
-                If you do not want to change the notes, insert [x].')
-            pro_notes = sys.argv[1]
-            if pro_name == 'x':
+            pro_name = input(
+                "Please insert a new Project name.\n \
+                If you do not want to change the name, insert [x]."
+            )
+            pro_notes = input(
+                "Please insert Project notes:  \n \
+                If you do not want to change the notes, insert [x]."
+            )
+            if pro_name == "x":
                 pro_name = self._selected_project.name
-            if pro_notes == 'x':
+            if pro_notes == "x":
                 pro_notes = self._selected_project.notes
             print(
                 "Project name: {}. \n \
@@ -249,10 +246,11 @@ class CLI:
                 If you want to save the changes, please insert [s]\n \
                 If you want to change again, \
                 please insert any character EXCEPT [s] and [c] \n \
-                If you want to cancel, please insert [c].".format(self._selected_project.name, self._selected_project.notes
+                If you want to cancel, please insert [c].".format(
+                    self._selected_project.name, self._selected_project.notes
                 )
             )
-            entry = sys.argv[1]
+            entry = input()
             if entry == "s":
                 self._selected_project.name = pro_name
                 self._selected_project.notes = pro_notes
@@ -266,71 +264,72 @@ class CLI:
         self._selected_user.delete_project(self._selected_project)
 
     def _select_project(self):
-            while True:
-                if self._selected_project.is_empty():
-                    print(
-                        "There are no Tasks yet. \
+        while True:
+            if self._selected_project.is_empty():
+                print(
+                    "There are no Tasks yet. \
                         Please insert [1] to add a new Task."
-                    )
-                    entry = sys.argv[1]
-                    try:
-                        entry == 1 or entry == "s"
-                    except ValueError:
-                        print(
-                            "Please insert a valid command. \n \
+                )
+                entry = input()
+                try:
+                    entry == 1 or entry == "s"
+                except ValueError:
+                    print(
+                        "Please insert a valid command. \n \
                             [1] create a new project \n \
                             [s] save programm"
-                        )
-                        continue
-                    if entry == "s":
-                        App.save_app()
-                    elif entry == "1":
-                        self._create_task()
-                        continue
-                    else:
-                        continue
+                    )
+                    continue
+                if entry == "s":
+                    App.save_app()
+                elif entry == "1":
+                    self._create_task()
+                    continue
                 else:
-                    print(
-                        "Here is a Task overview. \n \
+                    continue
+            else:
+                print(
+                    "Here is a Task overview. \n \
                         Select a Task by entering its number.\n \
                         If you want to create a new Task, please insert [n]. \n \
                         If you want to save the programm, please insert [s]. \n \
-                        If you want to go back to the Project Overview, please insert [p]."
-                    )
-                    print(self._app)
-                    task = input()
-                    if task == "n":
-                        self._create_project()
-                        continue
-                    elif task == 'p':
-                        break
-                    elif task == 's':
-                        self._app.save_app()
-                    try:
-                        self._get_selected_task(task)
-                    except ValueError:
-                        print("{} is no valid entry.".format(task))
-                        continue
-                    print(
-                        "Your selected Task is: {}.\n \
+                        If you want to go back to the Project Overview, \
+                        please insert [p]."
+                )
+                print(self._app)
+                task = input()
+                if task == "n":
+                    self._create_project()
+                    continue
+                elif task == "p":
+                    break
+                elif task == "s":
+                    self._app.save_app()
+                try:
+                    self._get_selected_task(task)
+                except ValueError:
+                    print("{} is no valid entry.".format(task))
+                    continue
+                print(
+                    "Your selected Task is: {}.\n \
                         Options:    [1] change Task state  \
                                     [2] edit the Task  \
                                     [3] delete the Task".format(
-                            self._selected_task.name
-                        )
+                        self._selected_task.name
+                    )
                 )
-                selection = input()
-                if selection == 1:
-                    self._change_state()
-                    continue
-                elif selection == 2:
-                    self._edit_task()
-                    continue
-                elif selection == 3:
-                    self._delete_task()
-                    continue
-                else:
-                    continue
+            selection = input()
+            if selection == 1:
+                self._change_state()
+                continue
+            elif selection == 2:
+                self._edit_task()
+                continue
+            elif selection == 3:
+                self._delete_task()
+                continue
+            else:
+                continue
 
     def _get_selected_task(self, number):
         self._selected_task = self._selected_project.tasks[number]
@@ -342,14 +341,16 @@ class CLI:
             self._selected_task.undo_task()
 
     def _create_task(self):
-         while True:
+        while True:
             task_name = input("Please insert the Task name: ")
-            task_notes = input('Please insert Task notes: ')
-            task_prio = input('Please insert Task Priority:\n \
+            task_notes = input("Please insert Task notes: ")
+            task_prio = input(
+                "Please insert Task Priority:\n \
                                 [0] none  \
                                 [1] low  \
                                 [2] medium  \
-                                [3] high')
+                                [3] high"
+            )
             task_priority = find_priority(task_prio)
             print(
                 "Task name: {}. \n \
@@ -358,7 +359,9 @@ class CLI:
                 If you want to save the Task name, please insert [s]\n \
                 If you want to change the Task name, \
                 please insert any character EXCEPT [s] and [c] \n \
-                If you want to cancel, please insert [c].".format(task_name, task_notes, task_priority)
+                If you want to cancel, please insert [c].".format(
+                    task_name, task_notes, task_priority
+                )
             )
             entry = input()
             if entry == "s":
@@ -371,7 +374,6 @@ class CLI:
                 break
             else:
                 continue
-         
 
     def _edit_task(self):
         while True:
@@ -380,24 +382,32 @@ class CLI:
                 Current Task notes: {} \n \
                 Current Task priority: {} \n \
                 ".format(
-                    self._selected_task.name, self._selected_task.notes, self._selected_task.priority
+                    self._selected_task.name,
+                    self._selected_task.notes,
+                    self._selected_task.priority,
                 )
             )
-            task_name = input('Please insert a new Task name.\n \
-                If you do not want to change the name, insert [x].')
-            task_notes = input('Please insert new Task notes:  \n \
-                If you do not want to change the notes, insert [x].')
-            task_priority = input('Please insert a new Task priority:  \n \
+            task_name = input(
+                "Please insert a new Task name.\n \
+                If you do not want to change the name, insert [x]."
+            )
+            task_notes = input(
+                "Please insert new Task notes:  \n \
+                If you do not want to change the notes, insert [x]."
+            )
+            task_priority = input(
+                "Please insert a new Task priority:  \n \
                                 [0] none  \
                                 [1] low  \
                                 [2] medium  \
                                 [3] high \n \
-                If you do not want to change the priority, insert [x].')
-            if task_name == 'x':
+                If you do not want to change the priority, insert [x]."
+            )
+            if task_name == "x":
                 task_name = self._selected_task.name
-            if task_notes == 'x':
+            if task_notes == "x":
                 task_notes = self._selected_task.notes
-            if task_priority == 'x':
+            if task_priority == "x":
                 task_priority = self._selected_task.priority
             print(
                 "Task name: {}. \n \
@@ -406,8 +416,12 @@ class CLI:
                 If you want to save the changes, please insert [s]\n \
                 If you want to change again, \
                 please insert any character EXCEPT [s] and [c] \n \
-                If you want to cancel, please insert [c].".format(self._selected_task.name, self._selected_task.notes, self._selected_task.priority)
+                If you want to cancel, please insert [c].".format(
+                    self._selected_task.name,
+                    self._selected_task.notes,
+                    self._selected_task.priority,
                 )
+            )
             entry = input()
             if entry == "s":
                 self._selected_task.name = task_name
@@ -421,3 +435,6 @@ class CLI:
 
     def _delete_task(self):
         self._selected_project.delete_task(self._selected_task)
+
+if __name__ == '__main__':
+    CLI()
