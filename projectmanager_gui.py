@@ -162,8 +162,8 @@ class ProjectManager_GUI(tk.Frame):
         )
         self._lbl_dscrb_project_color.grid(row=1, column=4, columnspan=2)
         self._lb_color_project.grid(row=2, column=4, columnspan=2, rowspan=4)
-        self._bttn_cancel_edit.grid(row=7, column=5)
-        self._bttn_save_edit.grid(row=7, column=4)
+        self._bttn_cancel_project.grid(row=7, column=5)
+        self._bttn_save_project.grid(row=7, column=4)
 
         # eventhandler
         self._bttn_save_project["command"] = self.save_new_project
